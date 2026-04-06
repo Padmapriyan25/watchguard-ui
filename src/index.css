@@ -49,38 +49,38 @@
 }
 
 :root {
-    --background: oklch(1 0 0);
-    --foreground: oklch(0.145 0 0);
-    --card: oklch(1 0 0);
-    --card-foreground: oklch(0.145 0 0);
-    --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.145 0 0);
-    --primary: oklch(0.205 0 0);
-    --primary-foreground: oklch(0.985 0 0);
-    --secondary: oklch(0.97 0 0);
-    --secondary-foreground: oklch(0.205 0 0);
-    --muted: oklch(0.97 0 0);
-    --muted-foreground: oklch(0.556 0 0);
-    --accent: oklch(0.97 0 0);
-    --accent-foreground: oklch(0.205 0 0);
-    --destructive: oklch(0.577 0.245 27.325);
-    --border: oklch(0.922 0 0);
-    --input: oklch(0.922 0 0);
-    --ring: oklch(0.708 0 0);
-    --chart-1: oklch(0.87 0 0);
-    --chart-2: oklch(0.556 0 0);
-    --chart-3: oklch(0.439 0 0);
-    --chart-4: oklch(0.371 0 0);
-    --chart-5: oklch(0.269 0 0);
-    --radius: 0.625rem;
-    --sidebar: oklch(0.985 0 0);
-    --sidebar-foreground: oklch(0.145 0 0);
-    --sidebar-primary: oklch(0.205 0 0);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.97 0 0);
-    --sidebar-accent-foreground: oklch(0.205 0 0);
-    --sidebar-border: oklch(0.922 0 0);
-    --sidebar-ring: oklch(0.708 0 0);
+    --background: oklch(0.98 0.01 86);
+    --foreground: oklch(0.28 0.03 262);
+    --card: oklch(0.995 0.004 95);
+    --card-foreground: oklch(0.28 0.03 262);
+    --popover: oklch(0.995 0.004 95);
+    --popover-foreground: oklch(0.28 0.03 262);
+    --primary: oklch(0.56 0.2 15);
+    --primary-foreground: oklch(0.99 0 0);
+    --secondary: oklch(0.96 0.01 85);
+    --secondary-foreground: oklch(0.32 0.03 262);
+    --muted: oklch(0.95 0.01 85);
+    --muted-foreground: oklch(0.54 0.03 258);
+    --accent: oklch(0.93 0.03 30);
+    --accent-foreground: oklch(0.35 0.03 262);
+    --destructive: oklch(0.58 0.22 26);
+    --border: oklch(0.9 0.01 80);
+    --input: oklch(0.91 0.01 82);
+    --ring: oklch(0.74 0.1 18);
+    --chart-1: oklch(0.72 0.16 22);
+    --chart-2: oklch(0.7 0.13 220);
+    --chart-3: oklch(0.78 0.11 155);
+    --chart-4: oklch(0.82 0.08 80);
+    --chart-5: oklch(0.62 0.06 282);
+    --radius: 1rem;
+    --sidebar: oklch(0.27 0.03 265);
+    --sidebar-foreground: oklch(0.97 0.01 90);
+    --sidebar-primary: oklch(0.62 0.18 17);
+    --sidebar-primary-foreground: oklch(0.99 0 0);
+    --sidebar-accent: oklch(0.33 0.03 264);
+    --sidebar-accent-foreground: oklch(0.96 0.01 90);
+    --sidebar-border: oklch(0.38 0.03 262);
+    --sidebar-ring: oklch(0.74 0.1 18);
 }
 
 .dark {
@@ -123,8 +123,46 @@
     }
   body {
     @apply bg-background text-foreground;
+    background-image:
+      radial-gradient(circle at top left, rgba(250, 98, 67, 0.1), transparent 26%),
+      radial-gradient(circle at top right, rgba(68, 132, 255, 0.08), transparent 20%),
+      linear-gradient(180deg, #f6f2ee 0%, #f5f6f9 48%, #eef2f8 100%);
+    min-height: 100vh;
     }
   html {
     @apply font-sans;
     }
+  #root {
+    min-height: 100vh;
+  }
+}
+
+@layer components {
+  .app-surface {
+    @apply rounded-[28px] border border-white/70 bg-white/88 shadow-[0_22px_55px_-36px_rgba(15,23,42,0.28)] backdrop-blur-xl;
+  }
+
+  .app-surface-muted {
+    @apply rounded-3xl border border-white/70 bg-white/60 shadow-[0_20px_55px_-36px_rgba(15,23,42,0.28)] backdrop-blur-lg;
+  }
+
+  .app-panel {
+    @apply rounded-[24px] border border-white/70 bg-white/92 shadow-[0_20px_44px_-34px_rgba(15,23,42,0.24)] backdrop-blur-xl;
+  }
+
+  .app-input {
+    @apply w-full rounded-2xl border border-white/80 bg-white/90 px-4 py-3 text-sm text-slate-700 shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] outline-none transition focus:border-[#f26749]/60 focus:ring-4 focus:ring-[#f26749]/10;
+  }
+
+  .app-chip {
+    @apply inline-flex items-center gap-2 rounded-full border border-white/80 bg-white/85 px-3 py-1 text-xs font-semibold text-slate-500 shadow-sm;
+  }
+
+  .app-button-primary {
+    @apply inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-[#f15a3d] to-[#e63b57] px-4 py-2.5 text-sm font-semibold text-white shadow-[0_16px_30px_-18px_rgba(230,59,87,0.9)] transition hover:brightness-105;
+  }
+
+  .app-button-secondary {
+    @apply inline-flex items-center justify-center rounded-2xl border border-slate-200 bg-white/90 px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50;
+  }
 }

@@ -8,64 +8,64 @@ interface SidebarProps {
 }
 
 const Sidebar = ({ onClose }: SidebarProps) => {
-  const activeClass = "flex items-center gap-3 px-4 py-3 bg-[#1A2333]/50 border-l-4 border-red-600 text-red-500 font-medium rounded-r-md";
-  const inactiveClass = "flex items-center gap-3 px-4 py-3 border-l-4 border-transparent hover:text-white transition-colors cursor-pointer text-slate-400";
+  const activeClass = 'group flex items-center gap-3 rounded-2xl bg-white px-4 py-3 text-[#22314a] shadow-[0_16px_30px_-24px_rgba(15,23,42,0.7)]';
+  const inactiveClass = 'group flex items-center gap-3 rounded-2xl px-4 py-3 text-slate-300 transition-all hover:bg-white/8 hover:text-white';
 
   return (
-    <div className="w-full lg:w-[260px] bg-[#2A3447] h-full text-slate-300 flex flex-col overflow-y-auto">
-      <div className="flex items-center justify-between px-5 h-[80px] shrink-0 border-b border-white/5">
-        <div className="flex items-center">
+    <div className="flex h-full w-full flex-col overflow-y-auto bg-[linear-gradient(180deg,#27324a_0%,#20283d_100%)] px-4 py-4 text-slate-300 lg:w-[260px]">
+      <div className="flex min-h-[78px] items-center justify-between rounded-[24px] border border-white/10 bg-white/6 px-4">
+        <div className="flex items-center gap-3">
           <img
             src={watchguardLogo}
             alt="WatchGuard"
-            className="block h-10 w-auto max-w-[185px] object-contain opacity-95 [filter:brightness(0)_invert(0.92)]"
+            className="block h-9 w-auto max-w-[148px] object-contain opacity-95 [filter:brightness(0)_invert(0.92)]"
           />
         </div>
         {onClose && (
-          <button onClick={onClose} className="lg:hidden p-2 -mr-2 text-slate-400 hover:text-white transition-colors rounded-lg hover:bg-white/10">
-            <X className="w-6 h-6" />
+          <button onClick={onClose} className="rounded-2xl p-2 text-slate-400 transition-colors hover:bg-white/10 hover:text-white lg:hidden">
+            <X className="h-6 w-6" />
           </button>
         )}
       </div>
 
-      <nav className="flex-1 mt-6">
+      <nav className="mt-6 flex-1">
         <ul className="space-y-1">
           <li className="mb-1">
-            <NavLink to="/" end onClick={onClose} className={({ isActive }) => isActive ? activeClass : inactiveClass}>
-              <Home className="w-5 h-5" />
+            <NavLink to="/" end onClick={onClose} className={({ isActive }) => (isActive ? activeClass : inactiveClass)}>
+              <Home className="h-5 w-5 text-[#f15a3d] group-hover:text-white" />
               Dashboard
             </NavLink>
           </li>
           <li className="mb-1">
-            <NavLink to="/purchase" onClick={onClose} className={({ isActive }) => isActive ? activeClass : inactiveClass}>
-              <ShoppingCart className="w-5 h-5" />
+            <NavLink to="/purchase" onClick={onClose} className={({ isActive }) => (isActive ? activeClass : inactiveClass)}>
+              <ShoppingCart className="h-5 w-5 text-[#7eb1ff] group-hover:text-white" />
               New Purchase
             </NavLink>
           </li>
           <li className="mb-1">
-            <NavLink to="/renewals" onClick={onClose} className={({ isActive }) => isActive ? activeClass : inactiveClass}>
-              <RefreshCw className="w-5 h-5" />
+            <NavLink to="/renewals" onClick={onClose} className={({ isActive }) => (isActive ? activeClass : inactiveClass)}>
+              <RefreshCw className="h-5 w-5 text-[#84d0b2] group-hover:text-white" />
               Renewals
             </NavLink>
           </li>
           <li className="mb-1">
-            <NavLink to="/billing" onClick={onClose} className={({ isActive }) => isActive ? activeClass : inactiveClass}>
-              <FileText className="w-5 h-5" />
+            <NavLink to="/billing" onClick={onClose} className={({ isActive }) => (isActive ? activeClass : inactiveClass)}>
+              <FileText className="h-5 w-5 text-[#f6d26b] group-hover:text-white" />
               Invoices & Billing
             </NavLink>
           </li>
         </ul>
       </nav>
 
-      <div className="p-4 mx-4 mb-6 bg-[#1F293A] rounded-lg mt-auto shrink-0 border border-slate-700/50 shadow-inner">
-        <div className="flex items-center gap-2 mb-2">
-          <Award className="w-5 h-5 text-yellow-500" />
-          <span className="text-white font-semibold text-sm">{sidebarPartnerData.tierLabel}</span>
+      <div className="mt-auto shrink-0 rounded-[24px] border border-white/10 bg-white/8 p-4 shadow-inner">
+        <div className="mb-2 flex items-center gap-2">
+          <Award className="h-5 w-5 text-yellow-400" />
+          <span className="text-sm font-semibold text-white">{sidebarPartnerData.tierLabel}</span>
         </div>
         <div className="text-xs">
-          <p className="text-slate-400 mb-1">{sidebarPartnerData.managerLabel}</p>
-          <p className="text-white font-medium">{sidebarPartnerData.managerName}</p>
-          <a href={sidebarPartnerData.supportHref} className="text-blue-400 hover:text-blue-300 mt-1 inline-block font-medium">{sidebarPartnerData.supportLabel}</a>
+          <p className="mb-1 text-slate-400">{sidebarPartnerData.managerLabel}</p>
+          <p className="font-medium text-white">{sidebarPartnerData.managerName}</p>
+          <a href={sidebarPartnerData.supportHref} className="mt-2 inline-block font-medium text-[#9ec0ff] hover:text-white">{sidebarPartnerData.supportLabel}</a>
         </div>
       </div>
     </div>

@@ -13,7 +13,7 @@ export const SelectField = ({ value, options, onChange, className = '' }: Select
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full appearance-none rounded-xl border border-slate-200 bg-white px-4 py-2.5 pr-10 text-sm text-slate-700 outline-none transition focus:border-[#007ac9] focus:ring-2 focus:ring-[#007ac9]/15"
+        className="app-input appearance-none pr-10"
       >
         {options.map((option) => (
           <option key={option} value={option}>

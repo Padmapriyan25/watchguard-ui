@@ -6,14 +6,12 @@ import AutoRenewSettings from './AutoRenewSettings';
 
 const InvoicesBilling = () => {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-7xl mx-auto h-full">
-      {/* Left Column - Invoices */}
+    <div className="grid h-full max-w-7xl grid-cols-1 gap-6 lg:grid-cols-3">
       <div className="lg:col-span-2">
         <InvoicesTable />
       </div>
-      
-      {/* Right Column - Billing Modules */}
-      <div className="flex flex-col">
+
+      <div className="flex flex-col gap-6">
         <BillingSummary />
         <PaymentMethods />
         <BillingAddress />

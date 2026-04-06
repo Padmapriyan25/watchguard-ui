@@ -15,19 +15,24 @@ const DashboardLayout = () => {
   else if (location.pathname.includes('billing')) headerTitle = 'Invoices & Billing';
 
   return (
-    <div className="min-h-screen bg-slate-50 flex font-sans overflow-x-hidden">
+    <div className="relative flex min-h-screen overflow-x-hidden font-sans">
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute left-[-10%] top-[-6rem] h-72 w-72 rounded-full bg-[#ffb6a3]/16 blur-3xl" />
+        <div className="absolute right-[-7%] top-40 h-80 w-80 rounded-full bg-[#a7c8ff]/14 blur-3xl" />
+      </div>
+
       {isMobileMenuOpen && (
         <div
-          className="fixed inset-0 bg-black/60 z-40 lg:hidden transition-opacity backdrop-blur-sm"
+          className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm transition-opacity lg:hidden"
           onClick={() => setIsMobileMenuOpen(false)}
         />
       )}
 
-      <aside className={`fixed inset-y-0 left-0 z-50 transform ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 transition-transform duration-300 ease-in-out w-[280px] lg:w-[260px] flex-shrink-0 shadow-2xl lg:shadow-none`}>
+      <aside className={`fixed inset-y-0 left-0 z-50 w-[280px] flex-shrink-0 transform shadow-2xl transition-transform duration-300 ease-in-out lg:w-[260px] lg:translate-x-0 lg:shadow-none ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         <Sidebar onClose={() => setIsMobileMenuOpen(false)} />
       </aside>
 
-      <div className="flex-1 lg:ml-[260px] flex flex-col relative min-h-screen w-full transition-all duration-300 ease-in-out">
+      <div className="relative flex min-h-screen w-full flex-1 flex-col transition-all duration-300 ease-in-out lg:ml-[260px]">
         <Header
           title={headerTitle}
           onMenuClick={() => setIsMobileMenuOpen(true)}
@@ -36,19 +41,15 @@ const DashboardLayout = () => {
           userInitials={headerUserData.initials}
         />
 
-        <main className="flex-1 p-4 md:p-6 lg:p-8 overflow-y-auto relative pb-24 lg:pb-8">
-          <div className="max-w-7xl mx-auto w-full">
+        <main className="relative flex-1 overflow-y-auto px-4 pb-16 pt-4 md:px-6 md:pt-5 lg:px-8 lg:pb-8">
+          <div className="mx-auto flex w-full max-w-[1320px] flex-col gap-5">
             <Outlet />
           </div>
         </main>
 
-        <footer className="py-4 text-center text-xs md:text-sm text-slate-400 bg-[#1A2333] mt-auto">
-          Copyright © 2025 WatchGuard Technologies, Inc. All Rights Reserved
+        <footer className="mx-4 mb-4 rounded-[22px] border border-white/60 bg-[#2d374f]/92 px-5 py-4 text-center text-xs text-slate-300 shadow-[0_20px_50px_-35px_rgba(15,23,42,0.7)] md:mx-6 md:text-sm lg:mx-8">
+          Copyright (c) 2025 WatchGuard Technologies, Inc. All Rights Reserved
         </footer>
-
-        <button className="fixed bottom-4 right-4 md:bottom-6 md:right-6 w-12 h-12 bg-[#E51E25] text-white rounded-full shadow-lg flex items-center justify-center font-bold text-lg hover:bg-red-800 transition-colors z-[35]">
-          ?
-        </button>
       </div>
     </div>
   );

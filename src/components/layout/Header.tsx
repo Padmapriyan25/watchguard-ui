@@ -1,4 +1,4 @@
-import { Bell, Search, Menu } from 'lucide-react';
+import { Bell, Search, Menu, ChevronDown } from 'lucide-react';
 
 interface HeaderProps {
   title: string;
@@ -10,40 +10,44 @@ interface HeaderProps {
 
 const Header = ({ title, onMenuClick, userName = 'John Doe', userRole = 'MSP Admin', userInitials = 'JD' }: HeaderProps) => {
   return (
-    <header className="h-[80px] bg-white border-b border-gray-200 shadow-sm flex items-center justify-between px-4 md:px-8 shrink-0">
-      <div className="flex items-center gap-4 border-r border-gray-100 pr-4 md:border-r-0 md:pr-0">
-        {onMenuClick && (
-          <button onClick={onMenuClick} className="lg:hidden p-2 -ml-2 text-slate-500 hover:text-slate-800 hover:bg-slate-100 rounded-lg transition-colors">
-            <Menu className="w-6 h-6" />
-          </button>
-        )}
-        <h1 className="text-xl md:text-2xl font-bold text-[#1A2333] tracking-tight">{title}</h1>
-      </div>
-      
-      <div className="flex items-center gap-2 md:gap-6 flex-1 justify-end">
-        <div className="relative hidden lg:block max-w-md w-full ml-8">
-          <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-          <input 
-            type="text" 
-            placeholder="Search accounts or subscriptions..." 
-            className="w-full pl-10 pr-4 py-2 bg-slate-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition-all font-medium placeholder:font-normal placeholder:text-gray-400"
-          />
+    <header className="sticky top-0 z-30 px-4 pt-4 md:px-6 md:pt-5 lg:px-8">
+      <div className="app-surface flex min-h-[78px] items-center justify-between gap-4 px-4 py-3 md:px-5">
+        <div className="flex items-center gap-4 pr-4 md:pr-0">
+          {onMenuClick && (
+            <button onClick={onMenuClick} className="rounded-2xl border border-white/80 bg-white/80 p-2 text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-800 lg:hidden">
+              <Menu className="h-6 w-6" />
+            </button>
+          )}
+          <div>
+            <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-400">WatchGuard Partner Portal</p>
+            <h1 className="text-xl font-bold tracking-tight text-[#1f2c44] md:text-[1.65rem]">{title}</h1>
+          </div>
         </div>
-        
-        <div className="flex items-center gap-2 md:gap-4 ml-auto">
-          <button className="relative p-2 text-gray-500 hover:text-slate-800 hover:bg-slate-50 rounded-full transition-colors">
-            <Bell className="w-5 h-5 md:w-6 md:h-6" />
-            <span className="absolute top-1 right-1 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-white"></span>
+
+        <div className="flex flex-1 items-center justify-end gap-2 md:gap-4 lg:gap-6">
+          <div className="relative hidden w-full max-w-md lg:block">
+            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+            <input
+              type="text"
+              placeholder="Search customers, invoices, renewals..."
+              className="app-input py-2.5 pl-10"
+            />
+          </div>
+
+          <button className="relative rounded-2xl border border-white/70 bg-white/80 p-2.5 text-gray-500 transition-colors hover:bg-slate-50 hover:text-slate-800">
+            <Bell className="h-5 w-5 md:h-6 md:w-6" />
+            <span className="absolute right-1 top-1 h-2.5 w-2.5 rounded-full border-2 border-white bg-red-500"></span>
           </button>
-          
-          <div className="flex items-center gap-3 border-l border-gray-200 pl-4 md:pl-6 ml-2 md:ml-0">
-            <div className="hidden sm:block text-right">
+
+          <div className="flex items-center gap-3 rounded-2xl border border-white/70 bg-white/85 px-2 py-2 shadow-sm">
+            <div className="hidden text-right sm:block">
               <p className="text-sm font-bold text-slate-800">{userName}</p>
-              <p className="text-xs text-gray-500 font-medium">{userRole}</p>
+              <p className="text-xs font-medium text-gray-500">{userRole}</p>
             </div>
-            <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-[#1A2333] flex items-center justify-center text-white font-bold shadow-sm">
+            <div className="flex h-9 w-9 items-center justify-center rounded-2xl bg-gradient-to-br from-[#26314d] to-[#3d4c71] text-sm font-bold text-white shadow-sm md:h-10 md:w-10">
               {userInitials}
             </div>
+            <ChevronDown className="hidden h-4 w-4 text-slate-400 sm:block" />
           </div>
         </div>
       </div>

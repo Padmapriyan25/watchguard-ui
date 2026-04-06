@@ -10,50 +10,64 @@ const SummaryCards = () => {
       title: 'Active Customers',
       value: metrics.activeCustomers.count,
       subtext: metrics.activeCustomers.subtext,
-      icon: <Users className="w-6 h-6 text-green-500" />,
+      icon: Users,
+      accent: 'from-[#ffd5c7] to-[#fff3ef]',
+      iconClass: 'text-[#f15a3d]',
     },
     {
       title: 'Active Subscriptions',
       value: metrics.activeSubscriptions.count,
       subtext: metrics.activeSubscriptions.subtext,
-      icon: <Box className="w-6 h-6 text-blue-500" />,
+      icon: Box,
+      accent: 'from-[#dce8ff] to-[#f4f8ff]',
+      iconClass: 'text-[#4f7fff]',
     },
     {
       title: 'Total Licenses',
       value: metrics.totalLicenses.count.toLocaleString(),
       subtext: `${metrics.totalLicenses.utilized.toLocaleString()} utilized / ${metrics.totalLicenses.available} available`,
-      icon: <Key className="w-6 h-6 text-green-500" />,
+      icon: Key,
+      accent: 'from-[#d9f4e8] to-[#f4fffa]',
+      iconClass: 'text-[#1fa971]',
     },
     {
       title: 'Outstanding Balance',
       value: `$${metrics.outstandingBalance.amount.toLocaleString()}`,
       subtext: metrics.outstandingBalance.dueText,
-      subtextClass: 'text-red-500 font-medium',
-      icon: <DollarSign className="w-6 h-6 text-red-500" />,
+      subtextClass: 'text-[#db4b39] font-semibold',
+      icon: DollarSign,
+      accent: 'from-[#ffe3db] to-[#fff6f2]',
+      iconClass: 'text-[#db4b39]',
     },
     {
       title: 'Renewals Due',
       value: metrics.renewalsDue.count,
       subtext: metrics.renewalsDue.nextDate,
-      subtextClass: 'text-orange-500 font-medium',
-      icon: <Calendar className="w-6 h-6 text-orange-500" />,
+      subtextClass: 'text-[#b46d00] font-semibold',
+      icon: Calendar,
+      accent: 'from-[#fff1ca] to-[#fff9ec]',
+      iconClass: 'text-[#c58b00]',
     },
   ];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-6">
-      {cards.map((card, idx) => (
-        <div key={idx} className="bg-white p-5 rounded-lg border border-gray-200 shadow-sm flex flex-col justify-between">
-          <div>
-            <div className="mb-3">{card.icon}</div>
-            <div className="text-3xl font-bold text-slate-800 mb-1">{card.value}</div>
-            <div className="text-sm font-medium text-slate-600 mb-1">{card.title}</div>
+    <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-5">
+      {cards.map((card, idx) => {
+        const Icon = card.icon;
+
+        return (
+          <div key={idx} className="app-panel overflow-hidden p-5">
+            <div className="flex items-start justify-between gap-4">
+              <div className={`flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br ${card.accent}`}>
+                <Icon className={`h-6 w-6 ${card.iconClass}`} />
+              </div>
+            </div>
+            <div className="mt-5 text-3xl font-bold tracking-tight text-slate-800">{card.value}</div>
+            <div className="mt-1 text-sm font-semibold text-slate-700">{card.title}</div>
+            <div className={`mt-2 text-xs ${card.subtextClass || 'text-slate-500'}`}>{card.subtext}</div>
           </div>
-          <div className={`text-xs ${card.subtextClass || 'text-slate-500'}`}>
-            {card.subtext}
-          </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 };

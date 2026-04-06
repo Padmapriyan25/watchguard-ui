@@ -36,8 +36,8 @@ const SubscriptionsFilters = ({
           <input
             value={search}
             onChange={(e) => onSearchChange(e.target.value)}
-            placeholder="Search by product name..."
-            className="w-full rounded-xl border border-slate-200 bg-white py-3 pl-11 pr-4 text-sm text-slate-700 outline-none transition focus:border-[#007ac9] focus:ring-2 focus:ring-[#007ac9]/15"
+            placeholder="Search by product, customer, or code..."
+            className="app-input pl-11"
           />
         </div>
 

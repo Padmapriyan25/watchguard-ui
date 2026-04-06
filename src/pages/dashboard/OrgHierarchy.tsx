@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { ChevronDown, ChevronRight } from 'lucide-react';
+import { ChevronDown, ChevronRight, Network } from 'lucide-react';
 import { useSelector } from 'react-redux';
 import type { RootState } from '../../store';
 import type { HierarchyNode } from '../../models/dashboardModel';
@@ -32,21 +32,16 @@ const TreeRow = ({ node, depth = 0, expandedIds, onToggle }: TreeRowProps) => {
     <div className="relative">
       <div className="flex items-center gap-3 py-2">
         <div className="flex items-center" style={{ marginLeft: `${depth * 22}px` }}>
-          {depth > 0 && (
-            <div className="mr-2 h-0 w-5 border-t-2 border-slate-200" />
-          )}
+          {depth > 0 && <div className="mr-2 h-0 w-5 border-t-2 border-slate-200" />}
           {hasChildren ? (
-            <button
-              onClick={() => onToggle(node.id)}
-              className="mr-2 flex h-5 w-5 items-center justify-center rounded text-slate-400 hover:bg-slate-100 hover:text-slate-700"
-            >
+            <button onClick={() => onToggle(node.id)} className="mr-2 flex h-6 w-6 items-center justify-center rounded-full text-slate-400 hover:bg-slate-100 hover:text-slate-700">
               {isExpanded ? <ChevronDown className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
             </button>
           ) : (
-            <div className="mr-2 h-5 w-5" />
+            <div className="mr-2 h-6 w-6" />
           )}
-          <div className="mr-3 h-7 rounded-r-md bg-slate-200" style={{ width: getBarWidth(node.percentage, depth) }}>
-            <div className={`h-full rounded-r-md ${node.color}`} style={{ width: `${Math.max(3, node.percentage)}%` }} />
+          <div className="mr-3 h-7 rounded-r-full bg-slate-200/70" style={{ width: getBarWidth(node.percentage, depth) }}>
+            <div className={`h-full rounded-r-full ${node.color}`} style={{ width: `${Math.max(3, node.percentage)}%` }} />
           </div>
         </div>
 
@@ -77,9 +72,7 @@ const OrgHierarchy = () => {
   const allExpanded = expandableIds.length > 0 && expandableIds.every((id) => expandedIds.includes(id));
 
   const handleToggle = (id: string) => {
-    setExpandedIds((current) =>
-      current.includes(id) ? current.filter((item) => item !== id) : [...current, id]
-    );
+    setExpandedIds((current) => (current.includes(id) ? current.filter((item) => item !== id) : [...current, id]));
   };
 
   const handleExpandAll = () => {
@@ -87,18 +80,26 @@ const OrgHierarchy = () => {
   };
 
   return (
-    <div className="mt-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-      <h2 className="mb-6 text-lg font-bold text-slate-800">Organization Hierarchy</h2>
+    <div className="app-panel mt-2 p-6">
+      <div className="mb-6 flex items-center justify-between gap-3">
+        <div>
+          <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-slate-400">
+            <Network className="h-4 w-4 text-[#4f7fff]" />
+            Customer structure
+          </div>
+          <h2 className="mt-2 text-lg font-bold text-slate-800">Organization Hierarchy</h2>
+        </div>
+      </div>
 
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto rounded-[24px] border border-white/80 bg-white/60 p-4">
         <div className="min-w-[720px]">
           <TreeRow node={root} expandedIds={expandedIds} onToggle={handleToggle} />
         </div>
       </div>
 
       <div className="mt-6 flex items-center justify-between border-t border-slate-100 pt-4 text-sm text-slate-500">
-        <span>Click bars to expand and explore the hierarchy</span>
-        <button onClick={handleExpandAll} className="font-medium text-blue-600 hover:text-blue-800">
+        <span>Click the disclosure buttons to expand and explore the hierarchy</span>
+        <button onClick={handleExpandAll} className="font-medium text-[#4f7fff] hover:text-[#315edf]">
           {allExpanded ? 'Collapse All' : 'Expand All'}
         </button>
       </div>
@@ -107,4 +108,3 @@ const OrgHierarchy = () => {
 };
 
 export default OrgHierarchy;
-

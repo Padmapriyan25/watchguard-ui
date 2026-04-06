@@ -7,13 +7,13 @@ interface SubscriptionsTableProps {
 
 const SubscriptionsTable = ({ subscriptions }: SubscriptionsTableProps) => {
   return (
-    <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+    <div className="app-panel overflow-hidden p-3">
       <div className="hidden overflow-x-auto lg:block">
         <table className="w-full min-w-[1080px] border-collapse text-sm">
           <thead>
-            <tr className="border-b border-slate-200 bg-white text-left">
+            <tr className="border-b border-slate-200/80 bg-white/40 text-left">
               {['Customer', 'Product', 'Category', 'Term', 'Total', 'Used', 'Utilization', 'Status', 'Auto-Renew', 'Renewal', 'Actions'].map((col) => (
-                <th key={col} className="px-4 py-4 text-[11px] font-semibold uppercase tracking-wide text-slate-400">
+                <th key={col} className="px-4 py-4 text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-400">
                   {col}
                 </th>
               ))}
@@ -24,7 +24,7 @@ const SubscriptionsTable = ({ subscriptions }: SubscriptionsTableProps) => {
               const pct = getUtilPct(subscription.utilized, subscription.licenses);
 
               return (
-                <tr key={subscription.id} className="border-b border-slate-100 last:border-0 hover:bg-slate-50/60">
+                <tr key={subscription.id} className="border-b border-slate-100 last:border-0 hover:bg-white/45">
                   <td className="px-4 py-4 text-sm text-slate-600">{subscription.customer}</td>
                   <td className="px-4 py-4">
                     <div className="font-semibold text-[#24355a]">{subscription.product}</div>
@@ -39,7 +39,7 @@ const SubscriptionsTable = ({ subscriptions }: SubscriptionsTableProps) => {
                   <td className="px-4 py-4 font-semibold text-slate-700">{subscription.licenses}</td>
                   <td className="px-4 py-4 text-sm text-slate-600">{subscription.utilized}</td>
                   <td className="px-4 py-4">
-                    <div className="w-13 rounded-full bg-slate-100">
+                    <div className="w-20 rounded-full bg-slate-100">
                       <div className={`h-1.5 rounded-full ${getUtilBarColor(pct)}`} style={{ width: `${pct}%` }} />
                     </div>
                     <div className="mt-1 text-xs font-semibold text-slate-600">{pct}%</div>
@@ -60,10 +60,10 @@ const SubscriptionsTable = ({ subscriptions }: SubscriptionsTableProps) => {
                   </td>
                   <td className="px-4 py-4 text-sm text-slate-600">{subscription.renewal}</td>
                   <td className="px-4 py-4">
-                    <div className="flex items-center gap-3 text-xs font-medium text-[#007ac9]">
-                      <button className="hover:text-[#005f9f]">Renew</button>
-                      <button className="hover:text-[#005f9f]">Add Seats</button>
-                      <button className="hover:text-[#005f9f]">View Details</button>
+                    <div className="flex items-center gap-2 text-xs font-medium">
+                      <button className="rounded-full bg-[#eef3ff] px-3 py-2 text-[#315edf]">Renew</button>
+                      <button className="rounded-full bg-slate-100 px-3 py-2 text-slate-700">Add Seats</button>
+                      <button className="rounded-full bg-slate-100 px-3 py-2 text-slate-700">View Details</button>
                     </div>
                   </td>
                 </tr>
@@ -73,12 +73,12 @@ const SubscriptionsTable = ({ subscriptions }: SubscriptionsTableProps) => {
         </table>
       </div>
 
-      <div className="space-y-3 p-4 lg:hidden">
+      <div className="space-y-3 p-1 lg:hidden">
         {subscriptions.map((subscription) => {
           const pct = getUtilPct(subscription.utilized, subscription.licenses);
 
           return (
-            <div key={subscription.id} className="rounded-xl border border-slate-200 p-4 shadow-sm">
+            <div key={subscription.id} className="rounded-[22px] border border-white/80 bg-white/75 p-4 shadow-[0_18px_40px_-32px_rgba(15,23,42,0.35)]">
               <div className="flex items-start justify-between gap-3">
                 <div>
                   <div className="text-base font-bold text-[#24355a]">{subscription.product}</div>
@@ -117,7 +117,7 @@ const SubscriptionsTable = ({ subscriptions }: SubscriptionsTableProps) => {
                   <button
                     type="button"
                     aria-label={`Auto renew ${subscription.product}`}
-                    className={`mt-1 relative inline-flex h-6 w-11 items-center rounded-full transition ${subscription.autoRenew ? 'bg-[#22c55e]' : 'bg-slate-200'}`}
+                    className={`relative mt-1 inline-flex h-6 w-11 items-center rounded-full transition ${subscription.autoRenew ? 'bg-[#22c55e]' : 'bg-slate-200'}`}
                   >
                     <span className={`inline-block h-5 w-5 rounded-full bg-white shadow transition ${subscription.autoRenew ? 'translate-x-5' : 'translate-x-0.5'}`} />
                   </button>
@@ -138,10 +138,10 @@ const SubscriptionsTable = ({ subscriptions }: SubscriptionsTableProps) => {
                 </div>
               </div>
 
-              <div className="mt-4 flex flex-wrap gap-2 text-xs font-medium text-[#007ac9]">
-                <button className="rounded-lg bg-blue-50 px-3 py-2">Renew</button>
-                <button className="rounded-lg bg-blue-50 px-3 py-2">Add Seats</button>
-                <button className="rounded-lg bg-blue-50 px-3 py-2">View Details</button>
+              <div className="mt-4 flex flex-wrap gap-2 text-xs font-medium">
+                <button className="rounded-full bg-[#eef3ff] px-3 py-2 text-[#315edf]">Renew</button>
+                <button className="rounded-full bg-slate-100 px-3 py-2 text-slate-700">Add Seats</button>
+                <button className="rounded-full bg-slate-100 px-3 py-2 text-slate-700">View Details</button>
               </div>
             </div>
           );
