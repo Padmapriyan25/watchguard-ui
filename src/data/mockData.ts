@@ -1,7 +1,7 @@
 export const headerUserData = {
-  name: 'John Doe',
-  role: 'MSP Admin',
-  initials: 'JD',
+  name: 'Acme IT Solutions',
+  role: 'Gold Partner',
+  initials: 'AI',
   email: 'john.doe@msp-portal.com'
 };
 
@@ -52,10 +52,10 @@ export const purchaseCustomersData = [
 ];
 
 export const purchaseCategoriesData = [
-  { id: 'network_security', name: 'Network Security' },
-  { id: 'endpoint', name: 'Endpoint' },
-  { id: 'identity', name: 'Identity' },
-  { id: 'cloud', name: 'Cloud' },
+  { id: 'network_security', name: 'Network Security', accent: 'text-blue-500' },
+  { id: 'endpoint', name: 'Endpoint', accent: 'text-violet-500' },
+  { id: 'identity', name: 'Identity', accent: 'text-green-500' },
+  { id: 'cloud', name: 'Cloud', accent: 'text-sky-500' },
 ];
 
 export const productsData = [
@@ -66,7 +66,19 @@ export const productsData = [
     priceTag: 'Starting from',
     priceValue: 2499,
     priceUnit: '/user/yr',
-    categoryId: 'network_security'
+    categoryId: 'network_security',
+    icon: 'flame',
+    billingCycles: ['Annual Upfront', 'Quarterly'],
+    termDiscounts: {
+      '1': 0,
+      '2': 0.05,
+      '3': 0.1
+    },
+    addOns: [
+      { id: 'priority-support', name: 'Priority Support', price: 249 },
+      { id: 'advanced-analytics', name: 'Advanced Analytics', price: 129 },
+      { id: 'custom-training', name: 'Custom Training', price: 399 }
+    ]
   },
   {
     id: 'p2',
@@ -75,7 +87,18 @@ export const productsData = [
     priceTag: 'Starting from',
     priceValue: 899,
     priceUnit: '/user/yr',
-    categoryId: 'network_security'
+    categoryId: 'network_security',
+    icon: 'shield',
+    billingCycles: ['Annual Upfront', 'Monthly'],
+    termDiscounts: {
+      '1': 0,
+      '2': 0.04,
+      '3': 0.08
+    },
+    addOns: [
+      { id: 'priority-support', name: 'Priority Support', price: 99 },
+      { id: 'rack-mount-kit', name: 'Rack Mount Kit', price: 79 }
+    ]
   },
   {
     id: 'p3',
@@ -84,7 +107,38 @@ export const productsData = [
     priceTag: 'Starting from',
     priceValue: 1.2,
     priceUnit: '/user/yr',
-    categoryId: 'network_security'
+    categoryId: 'cloud',
+    icon: 'globe',
+    billingCycles: ['Annual Upfront', 'Monthly'],
+    termDiscounts: {
+      '1': 0,
+      '2': 0.03,
+      '3': 0.07
+    },
+    addOns: [
+      { id: 'sandboxing', name: 'Cloud Sandboxing', price: 0.3 },
+      { id: 'reporting', name: 'Advanced Reporting', price: 0.2 }
+    ]
+  },
+  {
+    id: 'p4',
+    name: 'AuthPoint MFA',
+    description: 'Multi-factor authentication to protect identities and critical apps',
+    priceTag: 'Starting from',
+    priceValue: 4.5,
+    priceUnit: '/user/mo',
+    categoryId: 'identity',
+    icon: 'lock',
+    billingCycles: ['Monthly', 'Annual Upfront'],
+    termDiscounts: {
+      '1': 0,
+      '2': 0.05,
+      '3': 0.12
+    },
+    addOns: [
+      { id: 'risk-insights', name: 'Risk Insights', price: 1.1 },
+      { id: 'vip-support', name: 'VIP Support', price: 0.5 }
+    ]
   }
 ];
 

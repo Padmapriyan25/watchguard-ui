@@ -1,44 +1,106 @@
-import PurchaseStepper from './PurchaseStepper';
-import CategorySelector from './CategorySelector';
-import ProductGrid from './ProductGrid';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import type { RootState } from '../../store';
-import { setSelectedCustomer } from '../../store/purchaseSlice';
-import { ChevronDown } from 'lucide-react';
+import {
+  addConfiguredProductToCart,
+  goToBrowse,
+  goToCart,
+  goToConfigure,
+  placeOrder,
+  proceedToReview,
+  removeCartItem,
+  restartPurchase,
+  selectCartTotals,
+  selectProduct,
+  selectSelectedProduct,
+  setAcceptedTerms,
+  setAutoRenew,
+  setSelectedCategory,
+  setSelectedCustomer,
+  toggleAddOn,
+  updateConfiguration,
+} from '../../store/purchaseSlice';
+import BrowseStep from './BrowseStep';
+import CartStep from './CartStep';
+import ConfirmationStep from './ConfirmationStep';
+import ConfigureStep from './ConfigureStep';
+import PurchaseStepper from './PurchaseStepper';
+import ReviewStep from './ReviewStep';
 
 const NewPurchase = () => {
-  const { customers, selectedCustomer } = useSelector((state: RootState) => state.purchase);
   const dispatch = useDispatch();
+  const {
+    activeStep,
+    categories,
+    selectedCategory,
+    products,
+    customers,
+    selectedCustomer,
+    configuration,
+    cart,
+    acceptedTerms,
+    autoRenew,
+    placedOrder,
+  } = useSelector((state: RootState) => state.purchase);
+  const selectedProduct = useSelector(selectSelectedProduct);
+  const totals = useSelector(selectCartTotals);
+
+  const filteredProducts = products.filter((product) => product.categoryId === selectedCategory);
 
   return (
-    <div className="flex flex-col h-full max-w-7xl mx-auto">
+    <div className="mx-auto flex h-full max-w-6xl flex-col">
       <PurchaseStepper />
-      
-      <div className="bg-white rounded-lg border border-gray-200 shadow-sm p-8 flex-1 relative">
-        <h2 className="text-2xl font-bold text-[#1A2333] mb-6">Browse Products</h2>
-        
-        <div className="mb-6">
-          <label className="block text-sm font-semibold text-slate-800 mb-2">Select Customer</label>
-          <div className="relative">
-            <select 
-              value={selectedCustomer}
-              onChange={(e) => dispatch(setSelectedCustomer(e.target.value))}
-              className="w-full appearance-none bg-white border border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-            >
-              {customers.map(customer => (
-                <option key={customer} value={customer}>{customer}</option>
-              ))}
-            </select>
-            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-700">
-              <ChevronDown className="w-4 h-4" />
-            </div>
-          </div>
-        </div>
-        
-        <CategorySelector />
-        <ProductGrid />
-      </div>
 
+      {activeStep === 1 && (
+        <BrowseStep
+          customers={customers}
+          selectedCustomer={selectedCustomer}
+          categories={categories}
+          selectedCategory={selectedCategory}
+          filteredProducts={filteredProducts}
+          onCustomerChange={(customer) => dispatch(setSelectedCustomer(customer))}
+          onCategoryChange={(categoryId) => dispatch(setSelectedCategory(categoryId))}
+          onSelectProduct={(productId) => dispatch(selectProduct(productId))}
+        />
+      )}
+
+      {activeStep === 2 && selectedProduct && (
+        <ConfigureStep
+          selectedProduct={selectedProduct}
+          configuration={configuration}
+          onBack={() => dispatch(goToBrowse())}
+          onConfigurationChange={(changes) => dispatch(updateConfiguration(changes))}
+          onToggleAddOn={(addOnId) => dispatch(toggleAddOn(addOnId))}
+          onAddToCart={() => dispatch(addConfiguredProductToCart())}
+        />
+      )}
+
+      {activeStep === 3 && (
+        <CartStep
+          cart={cart}
+          totals={totals}
+          onRemoveItem={(itemId) => dispatch(removeCartItem(itemId))}
+          onContinueShopping={() => dispatch(goToConfigure())}
+          onProceed={() => dispatch(proceedToReview())}
+        />
+      )}
+
+      {activeStep === 4 && (
+        <ReviewStep
+          selectedCustomer={selectedCustomer}
+          cart={cart}
+          totals={totals}
+          acceptedTerms={acceptedTerms}
+          autoRenew={autoRenew}
+          onAcceptedTermsChange={(value) => dispatch(setAcceptedTerms(value))}
+          onAutoRenewChange={(value) => dispatch(setAutoRenew(value))}
+          onBack={() => dispatch(goToCart())}
+          onPlaceOrder={() => dispatch(placeOrder())}
+        />
+      )}
+
+      {activeStep === 5 && (
+        <ConfirmationStep placedOrder={placedOrder} onRestart={() => dispatch(restartPurchase())} />
+      )}
     </div>
   );
 };
