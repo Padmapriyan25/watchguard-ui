@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { Home, ShoppingCart, RefreshCw, FileText, Award, X } from 'lucide-react';
-import watchguardLogo from '../../assets/watchguard-logo.svg';
+import watchguardLogo from '../../assets/watchguard-logo.png';
 import { sidebarPartnerData } from '../../data/mockData';
 
 interface SidebarProps {
@@ -15,13 +15,11 @@ const Sidebar = ({ onClose }: SidebarProps) => {
     <div className="w-full lg:w-[260px] bg-[#2A3447] h-full text-slate-300 flex flex-col overflow-y-auto">
       <div className="flex items-center justify-between px-5 h-[80px] shrink-0 border-b border-white/5">
         <div className="flex items-center">
-          <div className="rounded-xl bg-white px-3 py-2 shadow-sm ring-1 ring-white/10">
-            <img
-              src={watchguardLogo}
-              alt="WatchGuard"
-              className="block h-7 w-auto max-w-[150px] object-contain"
-            />
-          </div>
+          <img
+            src={watchguardLogo}
+            alt="WatchGuard"
+            className="block h-10 w-auto max-w-[185px] object-contain opacity-95 [filter:brightness(0)_invert(0.92)]"
+          />
         </div>
         {onClose && (
           <button onClick={onClose} className="lg:hidden p-2 -mr-2 text-slate-400 hover:text-white transition-colors rounded-lg hover:bg-white/10">

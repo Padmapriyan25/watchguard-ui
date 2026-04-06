@@ -101,11 +101,88 @@ export const invoiceData = [
 ];
 
 export const hierarchyData = {
-  parent: { name: 'Acme IT Solutions (MSP)', percentage: 100 },
-  children: [
-    { id: 'child-1', name: 'TechCorp Industries', percentage: 65.40 },
-    { id: 'child-2', name: 'Global Finance Corp', percentage: 34.60 }
-  ]
+  root: {
+    id: 'root',
+    name: 'Acme IT Solutions',
+    percentage: 100,
+    color: 'bg-[#d90416]',
+    children: [
+      {
+        id: 'financial-services-group',
+        name: 'Financial Services Group',
+        percentage: 84.54,
+        color: 'bg-[#2f9458]',
+        children: [
+          {
+            id: 'firebox-t45-bundle',
+            name: 'Firebox T45 Bundle',
+            percentage: 73.18,
+            color: 'bg-[#157ac4]',
+            children: [],
+          },
+          {
+            id: 'panda-adaptive-defense-360',
+            name: 'Panda Adaptive Defense 360',
+            percentage: 11.36,
+            color: 'bg-[#157ac4]',
+            children: [],
+          }
+        ],
+      },
+      {
+        id: 'techcorp-industries',
+        name: 'TechCorp Industries',
+        percentage: 7.67,
+        color: 'bg-[#2f9458]',
+        children: [
+          {
+            id: 'authpoint-mfa',
+            name: 'AuthPoint MFA',
+            percentage: 4.13,
+            color: 'bg-[#157ac4]',
+            children: [],
+          },
+          {
+            id: 'dnswatchgo',
+            name: 'DNSWatchGO',
+            percentage: 3.54,
+            color: 'bg-[#157ac4]',
+            children: [],
+          }
+        ],
+      },
+      {
+        id: 'retail-solutions-inc',
+        name: 'Retail Solutions Inc',
+        percentage: 4.96,
+        color: 'bg-[#2f9458]',
+        children: [
+          {
+            id: 'watchguard-epdr',
+            name: 'WatchGuard EPDR',
+            percentage: 4.96,
+            color: 'bg-[#157ac4]',
+            children: [],
+          }
+        ],
+      },
+      {
+        id: 'healthcare-plus',
+        name: 'Healthcare Plus',
+        percentage: 2.83,
+        color: 'bg-[#2f9458]',
+        children: [
+          {
+            id: 'watchguard-cloud',
+            name: 'WatchGuard Cloud',
+            percentage: 2.83,
+            color: 'bg-[#157ac4]',
+            children: [],
+          }
+        ],
+      }
+    ],
+  }
 };
 
 export const purchaseCustomersData = [
@@ -588,3 +665,4 @@ export const accountExecutiveData = {
   phone: '+1 (206) 613-0895',
   ctaLabel: 'Contact Me'
 };
+

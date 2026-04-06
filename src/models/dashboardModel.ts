@@ -31,12 +31,22 @@ export const InvoiceSchema = z.object({
   status: z.enum(['Paid', 'Upcoming']),
 });
 
+export const HierarchyNodeSchema: z.ZodType<any> = z.lazy(() =>
+  z.object({
+    id: z.string(),
+    name: z.string(),
+    percentage: z.number(),
+    color: z.string(),
+    children: z.array(HierarchyNodeSchema).default([]),
+  })
+);
+
 export const HierarchyDataSchema = z.object({
-  parent: z.object({ name: z.string(), percentage: z.number() }),
-  children: z.array(z.object({ id: z.string(), name: z.string(), percentage: z.number() })),
+  root: HierarchyNodeSchema,
 });
 
 export type DashboardMetrics = z.infer<typeof DashboardMetricsSchema>;
 export type Subscription = z.infer<typeof SubscriptionSchema>;
 export type Invoice = z.infer<typeof InvoiceSchema>;
+export type HierarchyNode = z.infer<typeof HierarchyNodeSchema>;
 export type HierarchyData = z.infer<typeof HierarchyDataSchema>;
