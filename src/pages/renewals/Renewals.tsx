@@ -1,6 +1,7 @@
 import React from 'react';
 import { RefreshCw, Plus, TrendingUp, ShoppingCart, CheckCircle2 } from 'lucide-react';
 import { renewalActionsData, renewalBenefitsData } from '../../data/mockData';
+import { Card } from '../../components/common';
 
 const Renewals = () => {
   const getIcon = (iconId: string, className: string) => {
@@ -24,13 +25,13 @@ const Renewals = () => {
       {/* Action Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {renewalActionsData.map((card, idx) => (
-          <div key={idx} className="bg-white rounded-lg border border-gray-200 p-6 flex flex-col hover:border-gray-300 hover:shadow-md transition-all cursor-pointer">
+          <Card key={idx} className="flex flex-col hover:border-gray-300 hover:shadow-md transition-all cursor-pointer">
             <div className={`w-12 h-12 ${card.iconBg} rounded-lg flex items-center justify-center mb-6`}>
               {getIcon(card.iconId, "w-6 h-6 text-white")}
             </div>
             <h3 className="text-lg font-bold text-[#1A2333] mb-2">{card.title}</h3>
             <p className="text-sm text-slate-500">{card.description}</p>
-          </div>
+          </Card>
         ))}
       </div>
 

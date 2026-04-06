@@ -1,11 +1,11 @@
 import React from 'react';
-import SummaryCards from '../components/dashboard/SummaryCards';
-import ActiveSubscriptions from '../components/dashboard/ActiveSubscriptions';
-import AccountHealth from '../components/dashboard/AccountHealth';
-import QuickActions from '../components/dashboard/QuickActions';
-import RecentInvoices from '../components/dashboard/RecentInvoices';
-import AccountExecutive from '../components/dashboard/AccountExecutive';
-import OrgHierarchy from '../components/dashboard/OrgHierarchy';
+import SummaryCards from './SummaryCards';
+import ActiveSubscriptions from './ActiveSubscriptions';
+import AccountHealth from './AccountHealth';
+import QuickActions from './QuickActions';
+import RecentInvoices from './RecentInvoices';
+import AccountExecutive from './AccountExecutive';
+import OrgHierarchy from './OrgHierarchy';
 
 export default function DashboardPage() {
   return (

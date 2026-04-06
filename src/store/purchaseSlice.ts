@@ -1,21 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { purchaseCustomersData, purchaseCategoriesData, productsData } from '../data/mockData';
-
-export interface Category {
-  id: string;
-  name: string;
-}
-
-export interface Product {
-  id: string;
-  name: string;
-  description: string;
-  priceTag: string;
-  priceValue: number;
-  priceUnit: string;
-  categoryId: string;
-}
+import type { Category, Product } from '../models/purchaseModel';
 
 interface PurchaseState {
   customers: string[];
@@ -32,7 +18,7 @@ const initialState: PurchaseState = {
   activeStep: 1,
   categories: purchaseCategoriesData,
   selectedCategory: purchaseCategoriesData[0].id,
-  products: productsData
+  products: productsData as Product[]
 };
 
 const purchaseSlice = createSlice({

@@ -1,5 +1,5 @@
 import React from 'react';
-import NewPurchase from '../components/purchase/NewPurchase';
+import NewPurchase from './NewPurchase';
 
 export default function PurchasePage() {
   return <NewPurchase />;

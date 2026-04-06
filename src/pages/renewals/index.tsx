@@ -1,5 +1,5 @@
 import React from 'react';
-import Renewals from '../components/renewals/Renewals';
+import Renewals from './Renewals';
 
 export default function RenewalsPage() {
   return <Renewals />;

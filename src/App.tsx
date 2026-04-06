@@ -1,7 +1,11 @@
-import DefaultPage from "./pages/index";
+import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import AppRoutes from './routes';
 
-function App() {
-  return <DefaultPage />;
+export default function App() {
+  return (
+    <BrowserRouter>
+      <AppRoutes />
+    </BrowserRouter>
+  );
 }
-
-export default App;

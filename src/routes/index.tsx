@@ -1,10 +1,10 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import DashboardLayout from '../components/layout/DashboardLayout';
-import DashboardPage from '../pages/DashboardPage';
-import PurchasePage from '../pages/PurchasePage';
-import RenewalsPage from '../pages/RenewalsPage';
-import BillingPage from '../pages/BillingPage';
+import DashboardPage from '../pages/dashboard';
+import PurchasePage from '../pages/purchase';
+import RenewalsPage from '../pages/renewals';
+import BillingPage from '../pages/billing';
 
 export default function AppRoutes() {
   return (
