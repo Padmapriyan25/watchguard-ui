@@ -15,19 +15,82 @@ export const dashboardMetrics = {
 
 export const subscriptionsData = [
   { 
-    id: 'SUB-001', customer: 'TechCorp Industries', product: 'Firebox M290', 
-    category: { type: 'network', name: 'Network Security' }, licenses: 500, utilized: 480, 
-    status: 'Active', renewal: '2025-10-15' 
+    id: 'SUB-001',
+    customer: 'TechCorp Industries',
+    product: 'AuthPoint MFA',
+    productCode: 'PWTGISPNT1YRB5',
+    category: { type: 'identity', name: 'Identity' },
+    term: '1 Year',
+    licenses: 200,
+    utilized: 178,
+    status: 'Active',
+    autoRenew: true,
+    renewal: '6/30/2025'
   },
   { 
-    id: 'SUB-002', customer: 'Acme IT Solutions', product: 'AuthPoint MFA', 
-    category: { type: 'identity', name: 'Identity' }, licenses: 1200, utilized: 1180, 
-    status: 'Expiring Soon', renewal: '2025-04-01' 
+    id: 'SUB-002',
+    customer: 'Financial Services Group',
+    product: 'Firebox T45 Bundle',
+    productCode: 'T55BASAPT1YR',
+    category: { type: 'network', name: 'Network Security' },
+    term: '1 Year',
+    licenses: 50,
+    utilized: 50,
+    status: 'Expiring Soon',
+    autoRenew: false,
+    renewal: '5/3/2025'
   },
   { 
-    id: 'SUB-003', customer: 'Global Finance Corp', product: 'DNSWatchGO', 
-    category: { type: 'cloud', name: 'Cloud' }, licenses: 300, utilized: 210, 
-    status: 'Active', renewal: '2026-01-20' 
+    id: 'SUB-003',
+    customer: 'TechCorp Industries',
+    product: 'DNSWatchGO',
+    productCode: 'PWGDNSWATCHGO1YRB4',
+    category: { type: 'network', name: 'Network Security' },
+    term: '1 Year',
+    licenses: 500,
+    utilized: 340,
+    status: 'Active',
+    autoRenew: true,
+    renewal: '12/15/2025'
+  },
+  {
+    id: 'SUB-004',
+    customer: 'Healthcare Plus',
+    product: 'WatchGuard Cloud',
+    productCode: 'PWGCLOUD1YRB1',
+    category: { type: 'cloud', name: 'Cloud' },
+    term: '1 Year',
+    licenses: 100,
+    utilized: 88,
+    status: 'Active',
+    autoRenew: true,
+    renewal: '3/10/2026'
+  },
+  {
+    id: 'SUB-005',
+    customer: 'Financial Services Group',
+    product: 'Panda Adaptive Defense 360',
+    productCode: 'PWESSAEPDR1YRB4',
+    category: { type: 'endpoint', name: 'Endpoint' },
+    term: '1 Year',
+    licenses: 350,
+    utilized: 320,
+    status: 'Active',
+    autoRenew: true,
+    renewal: '8/20/2025'
+  },
+  {
+    id: 'SUB-006',
+    customer: 'Retail Solutions Inc',
+    product: 'WatchGuard EPDR',
+    productCode: 'PWESSEPDR1YRB6',
+    category: { type: 'endpoint', name: 'Endpoint' },
+    term: '1 Year',
+    licenses: 200,
+    utilized: 185,
+    status: 'Active',
+    autoRenew: false,
+    renewal: '7/15/2025'
   },
 ];
 

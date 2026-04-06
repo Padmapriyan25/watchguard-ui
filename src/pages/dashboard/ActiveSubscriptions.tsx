@@ -1,66 +1,121 @@
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import type { RootState } from '../../store';
-import { ArrowRight, CheckCircle2, Clock } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 const ActiveSubscriptions = () => {
   const { subscriptions } = useSelector((state: RootState) => state.dashboard);
 
+  const getUtilPct = (utilized: number, licenses: number) =>
+    Math.min(Math.round((utilized / licenses) * 100), 100);
+
+  const getUtilColor = (pct: number) => {
+    if (pct >= 100) return 'bg-red-500';
+    if (pct >= 85) return 'bg-amber-400';
+    return 'bg-green-500';
+  };
+
+  const getCategoryStyle = (type: string) => {
+    if (type === 'identity') return 'bg-green-50 text-green-700';
+    if (type === 'network') return 'bg-blue-50 text-blue-700';
+    if (type === 'endpoint') return 'bg-violet-50 text-violet-700';
+    return 'bg-teal-50 text-teal-700';
+  };
+
   return (
-    <div className="bg-white rounded-lg border border-gray-200 shadow-sm col-span-1 lg:col-span-2 overflow-hidden flex flex-col h-full">
-      <div className="p-5 flex justify-between items-center border-b border-gray-100">
-        <h2 className="text-lg font-bold text-slate-800">Active Subscriptions</h2>
-        <a href="#" className="flex items-center text-sm font-medium text-blue-600 hover:text-blue-800">
-          View All <ArrowRight className="w-4 h-4 ml-1" />
-        </a>
+    <div className="bg-white rounded-xl border border-gray-100 shadow-sm col-span-1 lg:col-span-2 overflow-hidden flex flex-col h-full">
+      <div className="px-6 py-4 flex justify-between items-center border-b border-gray-100">
+        <h2 className="text-sm font-semibold text-slate-800 tracking-wide uppercase">
+          Active Subscriptions
+        </h2>
+        <Link to="/subscriptions" className="flex items-center gap-1 text-xs font-medium text-blue-600 hover:text-blue-800 transition-colors">
+          View All <ArrowRight className="w-3.5 h-3.5" />
+        </Link>
       </div>
-      
-      <div className="overflow-x-auto p-5">
-        <table className="w-full text-sm text-left">
-          <thead className="text-xs text-gray-500 uppercase font-semibold">
-            <tr>
-              <th className="pb-3 border-b border-gray-200 font-medium">Customer</th>
-              <th className="pb-3 border-b border-gray-200 font-medium">Product</th>
-              <th className="pb-3 border-b border-gray-200 font-medium text-center">Category</th>
-              <th className="pb-3 border-b border-gray-200 font-medium text-center">Licenses</th>
-              <th className="pb-3 border-b border-gray-200 font-medium text-center">Utilized</th>
-              <th className="pb-3 border-b border-gray-200 font-medium text-center">Status</th>
-              <th className="pb-3 border-b border-gray-200 font-medium text-center">Renewal</th>
-              <th className="pb-3 border-b border-gray-200 font-medium text-center">Actions</th>
+
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="border-b border-gray-100">
+              {['Customer', 'Product', 'Category', 'Licenses', 'Utilized', 'Status', 'Renewal', 'Actions'].map((col, i) => (
+                <th
+                  key={col}
+                  className={`px-5 py-3 text-[11px] font-semibold text-gray-400 uppercase tracking-wider whitespace-nowrap ${i >= 2 ? 'text-center' : 'text-left'}`}
+                >
+                  {col}
+                </th>
+              ))}
             </tr>
           </thead>
           <tbody>
-            {subscriptions.map((sub) => (
-              <tr key={sub.id} className="border-b border-gray-100 last:border-0 hover:bg-gray-50 transition-colors">
-                <td className="py-4 text-gray-700 min-w-[120px]">{sub.customer}</td>
-                <td className="py-4 font-semibold text-slate-800 min-w-[150px]">{sub.product}</td>
-                <td className="py-4 text-center">
-                  <span className={`px-2 py-1 rounded-full text-xs font-medium 
-                    ${sub.category.type === 'identity' ? 'bg-green-100 text-green-700' : 
-                      sub.category.type === 'network' ? 'bg-blue-100 text-blue-700' : 
-                      'bg-cyan-100 text-cyan-700'}`}>
-                    {sub.category.name}
-                  </span>
-                </td>
-                <td className="py-4 text-center text-gray-700">{sub.licenses}</td>
-                <td className="py-4 text-center text-gray-700">{sub.utilized}</td>
-                <td className="py-4">
-                  <div className="flex items-center justify-center gap-1">
-                    {sub.status === 'Active' ? (
-                      <><CheckCircle2 className="w-4 h-4 text-green-500" /><span className="text-gray-700">Active</span></>
-                    ) : (
-                      <><Clock className="w-4 h-4 text-orange-500" /><span className="text-gray-700 whitespace-nowrap">Expiring Soon</span></>
-                    )}
-                  </div>
-                </td>
-                <td className="py-4 text-center text-gray-700">{sub.renewal}</td>
-                <td className="py-4 text-center">
-                  <div className="flex flex-col gap-1 items-center">
-                    <button className="text-blue-600 hover:text-blue-800 text-xs font-medium">Renew</button>
-                    <button className="text-blue-600 hover:text-blue-800 text-xs font-medium whitespace-nowrap">Add Seats</button>
-                  </div>
-                </td>
-              </tr>
-            ))}
+            {subscriptions.slice(0, 4).map((sub) => {
+              const pct = getUtilPct(sub.utilized, sub.licenses);
+              const isExpiring = sub.status === 'Expiring Soon';
+
+              return (
+                <tr
+                  key={sub.id}
+                  className="border-b border-gray-50 last:border-0 hover:bg-gray-50/70 transition-colors"
+                >
+                  <td className="px-5 py-4 text-gray-600 text-xs whitespace-nowrap">
+                    {sub.customer}
+                  </td>
+
+                  <td className="px-5 py-4 font-medium text-slate-800 whitespace-nowrap">
+                    {sub.product}
+                  </td>
+
+                  <td className="px-5 py-4 text-center">
+                    <span className={`inline-flex px-2.5 py-1 rounded-full text-[11px] font-medium ${getCategoryStyle(sub.category.type)}`}>
+                      {sub.category.name}
+                    </span>
+                  </td>
+
+                  <td className="px-5 py-4 text-center text-gray-600 text-xs">
+                    {sub.licenses.toLocaleString()}
+                  </td>
+
+                  <td className="px-5 py-4 text-center">
+                    <div className="flex flex-col items-center gap-1.5">
+                      <span className="text-xs text-gray-700">
+                        {sub.utilized.toLocaleString()}
+                        <span className="text-gray-400 ml-1">({pct}%)</span>
+                      </span>
+                      <div className="w-14 h-1.5 bg-gray-100 rounded-full overflow-hidden">
+                        <div
+                          className={`h-full rounded-full ${getUtilColor(pct)}`}
+                          style={{ width: `${pct}%` }}
+                        />
+                      </div>
+                    </div>
+                  </td>
+
+                  <td className="px-5 py-4 text-center">
+                    <div className="inline-flex items-center gap-1.5">
+                      <span className={`w-1.5 h-1.5 rounded-full ${isExpiring ? 'bg-amber-400' : 'bg-green-500'}`} />
+                      <span className={`text-xs font-medium ${isExpiring ? 'text-amber-700' : 'text-green-700'}`}>
+                        {sub.status}
+                      </span>
+                    </div>
+                  </td>
+
+                  <td className="px-5 py-4 text-center text-xs text-gray-500 whitespace-nowrap">
+                    {sub.renewal}
+                  </td>
+
+                  <td className="px-5 py-4 text-center">
+                    <div className="flex items-center justify-center gap-2">
+                      <button className="text-xs font-medium text-blue-600 hover:text-blue-800 hover:bg-blue-50 px-2 py-1 rounded transition-colors">
+                        Renew
+                      </button>
+                      <button className="text-xs font-medium text-blue-600 hover:text-blue-800 hover:bg-blue-50 px-2 py-1 rounded transition-colors whitespace-nowrap">
+                        Add Seats
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>

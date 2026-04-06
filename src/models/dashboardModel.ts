@@ -12,10 +12,13 @@ export const SubscriptionSchema = z.object({
   id: z.string(),
   customer: z.string(),
   product: z.string(),
+  productCode: z.string(),
   category: z.object({ type: z.string(), name: z.string() }),
+  term: z.string(),
   licenses: z.number(),
   utilized: z.number(),
   status: z.enum(['Active', 'Expiring Soon', 'Expired']),
+  autoRenew: z.boolean(),
   renewal: z.string(),
 });
 

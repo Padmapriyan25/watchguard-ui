@@ -4,6 +4,7 @@ import DashboardPage from '../pages/dashboard';
 import PurchasePage from '../pages/purchase';
 import RenewalsPage from '../pages/renewals';
 import BillingPage from '../pages/billing';
+import SubscriptionsPage from '../pages/subscriptions';
 
 export default function AppRoutes() {
   return (
@@ -13,6 +14,7 @@ export default function AppRoutes() {
         <Route path="purchase" element={<PurchasePage />} />
         <Route path="renewals" element={<RenewalsPage />} />
         <Route path="billing" element={<BillingPage />} />
+        <Route path="subscriptions" element={<SubscriptionsPage />} />
       </Route>
     </Routes>
   );
