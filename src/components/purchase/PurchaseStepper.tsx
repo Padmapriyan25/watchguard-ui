@@ -1,22 +1,15 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import type { RootState } from '../../store';
+import { purchaseStepsData } from '../../data/mockData';
 
 const PurchaseStepper = () => {
   const { activeStep } = useSelector((state: RootState) => state.purchase);
 
-  const steps = [
-    { number: 1, label: 'Step 1', subtitle: 'Browse' },
-    { number: 2, label: 'Step 2', subtitle: 'Configure' },
-    { number: 3, label: 'Step 3', subtitle: 'Review Cart' },
-    { number: 4, label: 'Step 4', subtitle: 'Place Order' },
-    { number: 5, label: 'Step 5', subtitle: 'Confirmation' },
-  ];
-
   return (
     <div className="bg-white rounded-lg border border-gray-200 shadow-sm p-6 mb-6">
       <div className="flex items-center justify-between max-w-4xl mx-auto">
-        {steps.map((step, index) => {
+        {purchaseStepsData.map((step, index) => {
           const isActive = step.number === activeStep;
           const isPassed = step.number < activeStep;
           
@@ -36,7 +29,7 @@ const PurchaseStepper = () => {
               </div>
               
               {/* Connector line */}
-              {index < steps.length - 1 && (
+              {index < purchaseStepsData.length - 1 && (
                 <div className="flex-1 h-0.5 mx-4 bg-gray-200 relative">
                   <div 
                     className="absolute top-0 left-0 h-full bg-[#E51E25] transition-all" 

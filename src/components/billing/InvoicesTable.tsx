@@ -1,42 +1,8 @@
 import React from 'react';
 import { Download } from 'lucide-react';
+import { billingInvoicesData } from '../../data/mockData';
 
 const InvoicesTable = () => {
-  const invoices = [
-    {
-      customer: 'TechCorp Industries',
-      id: 'INV-2025-0312',
-      date: '3/1/2025',
-      description: 'AuthPoint MFA Renewal - 200 licenses',
-      amount: '$12,400',
-      status: 'Paid',
-    },
-    {
-      customer: 'TechCorp Industries',
-      id: 'INV-2025-0211',
-      date: '2/1/2025',
-      description: 'DNSWatchGO Additional Licenses - 100 seats',
-      amount: '$3,200',
-      status: 'Paid',
-    },
-    {
-      customer: 'Financial Services Group',
-      id: 'INV-2025-0401',
-      date: '4/1/2025',
-      description: 'Panda Adaptive Defense 360 Renewal',
-      amount: '$4,280',
-      status: 'Outstanding',
-    },
-    {
-      customer: 'Financial Services Group',
-      id: 'INV-2025-0115',
-      date: '1/15/2025',
-      description: 'Firebox T45 Bundle Annual Service',
-      amount: '$8,900',
-      status: 'Paid',
-    }
-  ];
-
   return (
     <div className="bg-white rounded-lg border border-gray-200 shadow-sm p-6 h-full flex flex-col">
       <h2 className="text-xl font-bold text-[#1A2333] mb-6">Invoices</h2>
@@ -67,7 +33,7 @@ const InvoicesTable = () => {
             </tr>
           </thead>
           <tbody>
-            {invoices.map((inv, idx) => (
+            {billingInvoicesData.map((inv, idx) => (
               <tr key={idx} className="border-b border-gray-100 last:border-0 hover:bg-gray-50">
                 <td className="py-4 text-gray-700 w-[15%]">{inv.customer}</td>
                 <td className="py-4 font-bold text-slate-800 w-[10%]">{inv.id}</td>

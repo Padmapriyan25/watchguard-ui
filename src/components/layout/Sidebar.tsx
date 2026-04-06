@@ -1,20 +1,15 @@
 import React from 'react';
-import { Shield, Home, ShoppingCart, RefreshCw, FileText, BarChart2, Ticket, Settings, Award } from 'lucide-react';
+import { NavLink } from 'react-router-dom';
+import { Shield, Home, ShoppingCart, RefreshCw, FileText, Award } from 'lucide-react';
 
-interface SidebarProps {
-  activePage: string;
-  setActivePage: (page: string) => void;
-}
-
-const Sidebar = ({ activePage, setActivePage }: SidebarProps) => {
+const Sidebar = () => {
   const activeClass = "flex items-center gap-3 px-4 py-3 bg-[#1A2333]/50 border-l-4 border-red-600 text-red-500 font-medium rounded-r-md";
   const inactiveClass = "flex items-center gap-3 px-4 py-3 border-l-4 border-transparent hover:text-white transition-colors cursor-pointer text-slate-400";
 
   return (
     <div className="w-[260px] bg-[#2A3447] min-h-screen text-slate-300 flex flex-col fixed left-0 top-0 bottom-0 z-50">
       <div className="flex items-center px-6 h-[80px]">
-        {/* Mock WatchGuard Logo */}
-        <div className="flex items-center gap-2 text-white cursor-pointer" onClick={() => setActivePage('dashboard')}>
+        <div className="flex items-center gap-2 text-white cursor-pointer">
           <Shield className="w-8 h-8" />
           <span className="font-bold text-xl tracking-tight">WatchGuard</span>
         </div>
@@ -23,47 +18,29 @@ const Sidebar = ({ activePage, setActivePage }: SidebarProps) => {
       <nav className="flex-1 mt-4">
         <ul>
           <li className="mb-2">
-            <a onClick={() => setActivePage('dashboard')} className={activePage === 'dashboard' ? activeClass : inactiveClass}>
+            <NavLink to="/" end className={({ isActive }) => isActive ? activeClass : inactiveClass}>
               <Home className="w-5 h-5" />
               Dashboard
-            </a>
+            </NavLink>
           </li>
           <li className="mb-2">
-            <a onClick={() => setActivePage('purchase')} className={activePage === 'purchase' ? activeClass : inactiveClass}>
+            <NavLink to="/purchase" className={({ isActive }) => isActive ? activeClass : inactiveClass}>
               <ShoppingCart className="w-5 h-5" />
               New Purchase
-            </a>
+            </NavLink>
           </li>
           <li className="mb-2">
-            <a onClick={() => setActivePage('renewals')} className={activePage === 'renewals' ? activeClass : inactiveClass}>
+            <NavLink to="/renewals" className={({ isActive }) => isActive ? activeClass : inactiveClass}>
               <RefreshCw className="w-5 h-5" />
               Renewals
-            </a>
+            </NavLink>
           </li>
           <li className="mb-2">
-            <a onClick={() => setActivePage('billing')} className={activePage === 'billing' ? activeClass : inactiveClass}>
+            <NavLink to="/billing" className={({ isActive }) => isActive ? activeClass : inactiveClass}>
               <FileText className="w-5 h-5" />
               Invoices & Billing
-            </a>
+            </NavLink>
           </li>
-          {/* <li className="mb-2">
-            <a className={inactiveClass}>
-              <BarChart2 className="w-5 h-5" />
-              Usage Reports
-            </a>
-          </li>
-          <li className="mb-2">
-            <a className={inactiveClass}>
-              <Ticket className="w-5 h-5" />
-              Support Tickets
-            </a>
-          </li>
-          <li className="mb-2">
-            <a className={inactiveClass}>
-              <Settings className="w-5 h-5" />
-              Account Settings
-            </a>
-          </li> */}
         </ul>
       </nav>
 

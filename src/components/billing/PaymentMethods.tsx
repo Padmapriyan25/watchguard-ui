@@ -1,5 +1,6 @@
 import React from 'react';
 import { CreditCard, Plus } from 'lucide-react';
+import { defaultPaymentMethod } from '../../data/mockData';
 
 const PaymentMethods = () => {
   return (
@@ -15,11 +16,13 @@ const PaymentMethods = () => {
         <div className="flex items-center gap-3">
           <CreditCard className="w-6 h-6 text-slate-600" />
           <div>
-            <p className="text-sm font-bold text-[#1A2333]">Visa ending in 4242</p>
-            <p className="text-xs text-slate-500">Expires 12/2026</p>
+            <p className="text-sm font-bold text-[#1A2333]">{defaultPaymentMethod.type} ending in {defaultPaymentMethod.last4}</p>
+            <p className="text-xs text-slate-500">Expires {defaultPaymentMethod.expiry}</p>
           </div>
         </div>
-        <span className="bg-green-100 text-green-700 px-2 py-1 rounded text-xs font-bold">Default</span>
+        {defaultPaymentMethod.isDefault && (
+          <span className="bg-green-100 text-green-700 px-2 py-1 rounded text-xs font-bold">Default</span>
+        )}
       </div>
     </div>
   );

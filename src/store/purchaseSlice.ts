@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
+import { purchaseCustomersData, purchaseCategoriesData, productsData } from '../data/mockData';
 
 export interface Category {
   id: string;
@@ -26,45 +27,12 @@ interface PurchaseState {
 }
 
 const initialState: PurchaseState = {
-  customers: ['TechCorp Industries - Technology', 'Acme IT Solutions', 'Financial Services Group'],
-  selectedCustomer: 'TechCorp Industries - Technology',
+  customers: purchaseCustomersData,
+  selectedCustomer: purchaseCustomersData[0],
   activeStep: 1,
-  categories: [
-    { id: 'network_security', name: 'Network Security' },
-    { id: 'endpoint', name: 'Endpoint' },
-    { id: 'identity', name: 'Identity' },
-    { id: 'cloud', name: 'Cloud' },
-  ],
-  selectedCategory: 'network_security',
-  products: [
-    {
-      id: 'p1',
-      name: 'Firebox M290',
-      description: 'High-performance network security appliance for mid-size enterprises',
-      priceTag: 'Starting from',
-      priceValue: 2499,
-      priceUnit: '/user/yr',
-      categoryId: 'network_security'
-    },
-    {
-      id: 'p2',
-      name: 'Firebox T45',
-      description: 'Tabletop firewall perfect for small offices and remote locations',
-      priceTag: 'Starting from',
-      priceValue: 899,
-      priceUnit: '/user/yr',
-      categoryId: 'network_security'
-    },
-    {
-      id: 'p3',
-      name: 'DNSWatchGO',
-      description: 'Cloud-based DNS filtering and threat protection',
-      priceTag: 'Starting from',
-      priceValue: 1.2,
-      priceUnit: '/user/yr',
-      categoryId: 'network_security'
-    }
-  ]
+  categories: purchaseCategoriesData,
+  selectedCategory: purchaseCategoriesData[0].id,
+  products: productsData
 };
 
 const purchaseSlice = createSlice({

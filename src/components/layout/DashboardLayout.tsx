@@ -1,27 +1,23 @@
-import type { ReactNode } from 'react';
+import React from 'react';
+import { Outlet, useLocation } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import Header from './Header';
 
-interface DashboardLayoutProps {
-  children: ReactNode;
-  activePage: string;
-  setActivePage: (page: string) => void;
-}
-
-const DashboardLayout = ({ children, activePage, setActivePage }: DashboardLayoutProps) => {
-  const headerTitle = 
-    activePage === 'dashboard' ? 'Dashboard' : 
-    activePage === 'purchase' ? 'New Purchase' : 
-    activePage === 'renewals' ? 'Renewals & Account Management' :
-    'Invoices & Billing';
+const DashboardLayout = () => {
+  const location = useLocation();
+  
+  let headerTitle = 'Dashboard';
+  if (location.pathname.includes('purchase')) headerTitle = 'New Purchase';
+  else if (location.pathname.includes('renewals')) headerTitle = 'Renewals & Account Management';
+  else if (location.pathname.includes('billing')) headerTitle = 'Invoices & Billing';
 
   return (
     <div className="min-h-screen bg-slate-50 flex font-sans">
-      <Sidebar activePage={activePage} setActivePage={setActivePage} />
+      <Sidebar />
       <div className="flex-1 ml-[260px] flex flex-col relative min-h-screen">
         <Header title={headerTitle} />
         <main className="flex-1 p-8 overflow-y-auto relative pb-24">
-          {children}
+          <Outlet />
         </main>
         
         {/* Footer */}

@@ -1,4 +1,5 @@
 import React from 'react';
+import { billingAddressData } from '../../data/mockData';
 
 const BillingAddress = () => {
   return (
@@ -6,11 +7,10 @@ const BillingAddress = () => {
       <h3 className="text-lg font-bold text-[#1A2333] mb-4">Billing Address</h3>
       
       <div className="text-sm text-slate-600 space-y-1 mb-6">
-        <p className="font-bold text-[#1A2333]">Acme IT Solutions</p>
-        <p>123 Business Park Drive</p>
-        <p>Suite 400</p>
-        <p>San Francisco, CA 94107</p>
-        <p>United States</p>
+        <p className="font-bold text-[#1A2333]">{billingAddressData.company}</p>
+        {billingAddressData.lines.map((line, idx) => (
+          <p key={idx}>{line}</p>
+        ))}
       </div>
       
       <button className="text-sm font-bold text-blue-600 hover:text-blue-800">
