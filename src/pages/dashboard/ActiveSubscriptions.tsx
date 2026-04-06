@@ -1,123 +1,186 @@
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import type { RootState } from '../../store';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, CheckCircle2, AlertCircle } from 'lucide-react';
 
 const ActiveSubscriptions = () => {
   const { subscriptions } = useSelector((state: RootState) => state.dashboard);
+  const visibleSubscriptions = subscriptions.slice(0, 4);
 
   const getUtilPct = (utilized: number, licenses: number) =>
     Math.min(Math.round((utilized / licenses) * 100), 100);
 
-  const getUtilColor = (pct: number) => {
-    if (pct >= 100) return 'bg-red-500';
-    if (pct >= 85) return 'bg-amber-400';
-    return 'bg-green-500';
-  };
-
   const getCategoryStyle = (type: string) => {
-    if (type === 'identity') return 'bg-green-50 text-green-700';
-    if (type === 'network') return 'bg-blue-50 text-blue-700';
-    if (type === 'endpoint') return 'bg-violet-50 text-violet-700';
-    return 'bg-teal-50 text-teal-700';
+    if (type === 'identity') return 'bg-emerald-100 text-emerald-700';
+    if (type === 'network') return 'bg-blue-100 text-blue-700';
+    if (type === 'endpoint') return 'bg-violet-100 text-violet-700';
+    return 'bg-cyan-100 text-cyan-700';
   };
 
   return (
-    <div className="bg-white rounded-xl border border-gray-100 shadow-sm col-span-1 lg:col-span-2 overflow-hidden flex flex-col h-full">
-      <div className="px-6 py-4 flex justify-between items-center border-b border-gray-100">
-        <h2 className="text-sm font-semibold text-slate-800 tracking-wide uppercase">
+    <div className="col-span-1 lg:col-span-2 flex h-full flex-col rounded-2xl border border-gray-200 bg-white shadow-sm">
+
+      {/* Header */}
+      <div className="flex items-center justify-between px-4 sm:px-5 py-4 border-b">
+        <h2 className="text-base font-semibold text-[#24355a]">
           Active Subscriptions
         </h2>
-        <Link to="/subscriptions" className="flex items-center gap-1 text-xs font-medium text-blue-600 hover:text-blue-800 transition-colors">
-          View All <ArrowRight className="w-3.5 h-3.5" />
+
+        <Link
+          to="/subscriptions"
+          className="flex items-center gap-1 text-sm font-medium text-blue-600 hover:text-blue-800"
+        >
+          View All <ArrowRight className="h-4 w-4" />
         </Link>
       </div>
 
-      <div className="overflow-x-auto">
-        <table className="w-full text-sm">
-          <thead>
-            <tr className="border-b border-gray-100">
-              {['Customer', 'Product', 'Category', 'Licenses', 'Utilized', 'Status', 'Renewal', 'Actions'].map((col, i) => (
-                <th
-                  key={col}
-                  className={`px-5 py-3 text-[11px] font-semibold text-gray-400 uppercase tracking-wider whitespace-nowrap ${i >= 2 ? 'text-center' : 'text-left'}`}
-                >
-                  {col}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {subscriptions.slice(0, 4).map((sub) => {
-              const pct = getUtilPct(sub.utilized, sub.licenses);
-              const isExpiring = sub.status === 'Expiring Soon';
+      {/* ================= MOBILE ================= */}
+      <div className="md:hidden divide-y">
+        {visibleSubscriptions.map((sub) => {
+          const pct = getUtilPct(sub.utilized, sub.licenses);
+          const isExpiring = sub.status === 'Expiring Soon';
 
-              return (
-                <tr
-                  key={sub.id}
-                  className="border-b border-gray-50 last:border-0 hover:bg-gray-50/70 transition-colors"
-                >
-                  <td className="px-5 py-4 text-gray-600 text-xs whitespace-nowrap">
-                    {sub.customer}
-                  </td>
+          return (
+            <div key={sub.id} className="p-4 hover:bg-gray-50 transition">
 
-                  <td className="px-5 py-4 font-medium text-slate-800 whitespace-nowrap">
+              {/* Top */}
+              <div className="flex justify-between items-start">
+                <div>
+                  <p className="font-semibold text-sm text-[#24355a]">
                     {sub.product}
-                  </td>
+                  </p>
+                  <p className="text-xs text-slate-400">
+                    {sub.customer}
+                  </p>
+                </div>
 
-                  <td className="px-5 py-4 text-center">
-                    <span className={`inline-flex px-2.5 py-1 rounded-full text-[11px] font-medium ${getCategoryStyle(sub.category.type)}`}>
-                      {sub.category.name}
-                    </span>
-                  </td>
+                <span
+                  className={`flex items-center gap-1 text-[10px] px-2 py-1 rounded-full font-semibold
+                  ${isExpiring ? 'bg-amber-100 text-amber-700' : 'bg-green-100 text-green-700'}`}
+                >
+                  {isExpiring ? <AlertCircle className="w-3 h-3" /> : <CheckCircle2 className="w-3 h-3" />}
+                  {sub.status}
+                </span>
+              </div>
 
-                  <td className="px-5 py-4 text-center text-gray-600 text-xs">
-                    {sub.licenses.toLocaleString()}
-                  </td>
+              {/* Category */}
+              <div className="mt-2">
+                <span className={`px-2 py-0.5 text-[10px] rounded-full ${getCategoryStyle(sub.category.type)}`}>
+                  {sub.category.name}
+                </span>
+              </div>
 
-                  <td className="px-5 py-4 text-center">
-                    <div className="flex flex-col items-center gap-1.5">
-                      <span className="text-xs text-gray-700">
-                        {sub.utilized.toLocaleString()}
-                        <span className="text-gray-400 ml-1">({pct}%)</span>
-                      </span>
-                      <div className="w-14 h-1.5 bg-gray-100 rounded-full overflow-hidden">
-                        <div
-                          className={`h-full rounded-full ${getUtilColor(pct)}`}
-                          style={{ width: `${pct}%` }}
-                        />
-                      </div>
-                    </div>
-                  </td>
+              {/* Progress */}
+              <div className="mt-3">
+                <div className="flex justify-between text-xs mb-1 text-slate-500">
+                  <span>Utilization</span>
+                  <span>{pct}%</span>
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-2">
+                  <div
+                    className="bg-blue-600 h-2 rounded-full"
+                    style={{ width: `${pct}%` }}
+                  />
+                </div>
+              </div>
 
-                  <td className="px-5 py-4 text-center">
-                    <div className="inline-flex items-center gap-1.5">
-                      <span className={`w-1.5 h-1.5 rounded-full ${isExpiring ? 'bg-amber-400' : 'bg-green-500'}`} />
-                      <span className={`text-xs font-medium ${isExpiring ? 'text-amber-700' : 'text-green-700'}`}>
-                        {sub.status}
-                      </span>
-                    </div>
-                  </td>
+              {/* Bottom */}
+              <div className="mt-3 flex justify-between items-center text-sm">
+                <span className="font-medium">{sub.utilized}/{sub.licenses}</span>
+                <span className="text-xs text-slate-400">Renews {sub.renewal}</span>
+              </div>
 
-                  <td className="px-5 py-4 text-center text-xs text-gray-500 whitespace-nowrap">
-                    {sub.renewal}
-                  </td>
+              {/* Actions */}
+              <div className="mt-3 flex gap-2">
+                <button className="flex-1 bg-blue-600 text-white text-xs py-2 rounded-md hover:bg-blue-700">
+                  Renew
+                </button>
+                <button className="flex-1 border text-xs py-2 rounded-md text-slate-600 hover:bg-slate-800 hover:text-white">
+                  Add Seats
+                </button>
+              </div>
+            </div>
+          );
+        })}
+      </div>
 
-                  <td className="px-5 py-4 text-center">
-                    <div className="flex items-center justify-center gap-2">
-                      <button className="text-xs font-medium text-blue-600 hover:text-blue-800 hover:bg-blue-50 px-2 py-1 rounded transition-colors">
-                        Renew
-                      </button>
-                      <button className="text-xs font-medium text-blue-600 hover:text-blue-800 hover:bg-blue-50 px-2 py-1 rounded transition-colors whitespace-nowrap">
-                        Add Seats
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+      {/* ================= TABLE ================= */}
+      <div className="hidden md:block overflow-x-auto px-4 sm:px-5 py-3">
+
+        {/* Header */}
+        <div className="min-w-[700px] grid grid-cols-[1.5fr_1.5fr_1fr_1fr_1fr_1fr_1fr] gap-4 text-[11px] font-semibold uppercase text-slate-500 border-b pb-3">
+          <div>Customer</div>
+          <div>Product</div>
+          <div>Category</div>
+          <div>Usage</div>
+          <div>Status</div>
+          <div className="hidden lg:block">Renewal</div>
+          <div className="text-right">Actions</div>
+        </div>
+
+        {visibleSubscriptions.map((sub) => {
+          const pct = getUtilPct(sub.utilized, sub.licenses);
+          const isExpiring = sub.status === 'Expiring Soon';
+
+          return (
+            <div
+              key={sub.id}
+              className="min-w-[700px] grid grid-cols-[1.5fr_1.5fr_1fr_1fr_1fr_1fr_1fr] gap-4 py-4 border-b last:border-none items-center hover:bg-gray-50 transition"
+            >
+              <div className="truncate text-sm text-[#24355a]">
+                {sub.customer}
+              </div>
+
+              <div className="truncate text-sm font-semibold text-[#24355a]">
+                {sub.product}
+              </div>
+
+              <span className={`px-2 py-1 text-[10px] rounded-full w-fit ${getCategoryStyle(sub.category.type)}`}>
+                {sub.category.name}
+              </span>
+
+              {/* Usage with progress */}
+              <div>
+                <div className="flex justify-between text-xs text-slate-500">
+                  <span>{sub.utilized}/{sub.licenses}</span>
+                  <span>{pct}%</span>
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-1.5 mt-1">
+                  <div
+                    className="bg-blue-600 h-1.5 rounded-full"
+                    style={{ width: `${pct}%` }}
+                  />
+                </div>
+              </div>
+
+              {/* Status */}
+              <div>
+                <span
+                  className={`flex items-center gap-1 text-[11px] px-2 py-1 rounded-full w-fit font-medium
+                  ${isExpiring ? 'bg-amber-100 text-amber-700' : 'bg-green-100 text-green-700'}`}
+                >
+                  {isExpiring ? <AlertCircle className="w-3 h-3" /> : <CheckCircle2 className="w-3 h-3" />}
+                  {sub.status}
+                </span>
+              </div>
+
+              {/* Renewal */}
+              <div className="hidden lg:block text-sm text-slate-500">
+                {sub.renewal}
+              </div>
+
+              {/* Actions */}
+              <div className="flex justify-end gap-2">
+                <button className="px-3 py-1 text-xs rounded-md border border-blue-200 text-blue-600 hover:bg-blue-600 hover:text-white transition">
+                  Renew
+                </button>
+                <button className="px-3 py-1 text-xs rounded-md border text-slate-600 hover:bg-slate-800 hover:text-white transition">
+                  Add Seats
+                </button>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
