@@ -1,6 +1,5 @@
 import type { CartItem, OrderTotals } from '../../models/purchaseModel';
 import { purchaseReviewContent } from '../../data/mockData';
-import { Panel } from '../../components/common';
 import { formatMoney } from './purchaseUi';
 
 interface ReviewStepProps {
@@ -27,20 +26,20 @@ const ReviewStep = ({
   onPlaceOrder,
 }: ReviewStepProps) => {
   return (
-    <Panel className="w-full p-5 md:p-6">
-      <h2 className="mb-5 text-[1.75rem] font-bold text-[#1A2333]">Review Order Summary</h2>
+    <div className="rounded-[26px] border border-slate-200 bg-white p-5 shadow-[0_10px_24px_rgba(15,23,42,0.07)] md:p-6">
+      <h2 className="mb-5 text-[1.9rem] font-bold tracking-tight text-[#1A2333]">Review Order Summary</h2>
 
       <div className="grid gap-4 lg:grid-cols-2">
-        <div className="rounded-xl border border-slate-200 p-4">
-          <h3 className="mb-3 text-lg font-bold text-[#24355a]">Billing Details</h3>
+        <div className="rounded-[20px] border border-slate-200 p-4 shadow-[0_8px_18px_rgba(15,23,42,0.04)]">
+          <h3 className="mb-3 text-[1.2rem] font-bold tracking-tight text-[#24355a]">Billing Details</h3>
           <div className="space-y-1.5 text-sm text-slate-500">
             <p>{selectedCustomer}</p>
             <p>{purchaseReviewContent.billingEmail}</p>
             <p>{purchaseReviewContent.paymentLabel}</p>
           </div>
         </div>
-        <div className="rounded-xl border border-slate-200 p-4">
-          <h3 className="mb-3 text-lg font-bold text-[#24355a]">Order Summary</h3>
+        <div className="rounded-[20px] border border-slate-200 p-4 shadow-[0_8px_18px_rgba(15,23,42,0.04)]">
+          <h3 className="mb-3 text-[1.2rem] font-bold tracking-tight text-[#24355a]">Order Summary</h3>
           <div className="space-y-1.5 text-sm text-slate-500">
             <p>{cart.length} {purchaseReviewContent.orderSummaryProductSuffix}</p>
             <p>Total: {formatMoney(totals.total)}</p>
@@ -49,7 +48,7 @@ const ReviewStep = ({
         </div>
       </div>
 
-      <label className="mt-4 flex items-center gap-3 rounded-xl border border-slate-200 px-4 py-3 text-sm text-slate-700">
+      <label className="mt-4 flex items-center gap-3 rounded-[18px] border border-slate-200 px-4 py-3 text-sm text-slate-700 transition hover:border-slate-300 hover:bg-slate-50">
         <input
           type="checkbox"
           checked={acceptedTerms}
@@ -59,7 +58,7 @@ const ReviewStep = ({
         {purchaseReviewContent.termsLabel}
       </label>
 
-      <label className="mt-3 flex items-center gap-3 rounded-xl border border-slate-200 px-4 py-3 text-sm text-slate-700">
+      <label className="mt-3 flex items-center gap-3 rounded-[18px] border border-slate-200 px-4 py-3 text-sm text-slate-700 transition hover:border-slate-300 hover:bg-slate-50">
         <input
           type="checkbox"
           checked={autoRenew}
@@ -81,7 +80,7 @@ const ReviewStep = ({
           Place Order {'->'}
         </button>
       </div>
-    </Panel>
+    </div>
   );
 };
 

@@ -26,14 +26,14 @@ const ConfigureStep = ({
   const total = (selectedProduct.priceValue + addOnsTotal) * configuration.quantity * configuration.termYears * (1 - discount);
 
   return (
-    <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_280px]">
-      <Panel className="p-5 md:p-6">
+    <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_290px]">
+      <Panel className="rounded-[26px] p-5 md:p-6">
         <button onClick={onBack} className="mb-5 inline-flex items-center gap-2 text-sm font-medium text-[#007ac9]">
           <ChevronLeft className="h-4 w-4" />
           Back to Products
         </button>
 
-        <h2 className="mb-6 text-3xl font-bold tracking-tight text-[#1A2333]">{selectedProduct.name}</h2>
+        <h2 className="mb-6 text-[2rem] font-bold tracking-tight text-[#1A2333]">{selectedProduct.name}</h2>
 
         <div className="mb-6">
           <p className="mb-3 text-sm font-semibold text-slate-700">Term Length</p>
@@ -46,12 +46,14 @@ const ConfigureStep = ({
                 <button
                   key={year}
                   onClick={() => onConfigurationChange({ termYears: year })}
-                  className={`rounded-xl border px-4 py-4 text-center transition ${
-                    isSelected ? 'border-[#ff5a4d] bg-[#fff8f7]' : 'border-slate-200 hover:border-slate-300'
+                  className={`rounded-[18px] border px-4 py-4 text-center transition ${
+                    isSelected
+                      ? 'border-[#ff5a4d] bg-[#fff8f7] shadow-[0_12px_28px_rgba(255,90,77,0.08)]'
+                      : 'border-slate-200 hover:border-slate-300 hover:shadow-[0_10px_22px_rgba(15,23,42,0.04)]'
                   }`}
                 >
-                  <div className="text-lg font-bold text-[#24355a]">{year} Year{year > 1 ? 's' : ''}</div>
-                  <div className="mt-1 text-sm text-slate-400">
+                  <div className="text-[1.35rem] font-bold text-[#24355a]">{year} Year{year > 1 ? 's' : ''}</div>
+                  <div className="mt-1 text-xs text-slate-400">
                     {savings > 0 ? `Save ${Math.round(savings * 100)}%` : 'Standard term'}
                   </div>
                 </button>
@@ -65,16 +67,16 @@ const ConfigureStep = ({
           <div className="flex items-center gap-3">
             <button
               onClick={() => onConfigurationChange({ quantity: Math.max(1, configuration.quantity - 1) })}
-              className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-100 text-slate-700"
+              className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-100 text-slate-700 transition hover:bg-slate-200"
             >
               <Minus className="h-4 w-4" />
             </button>
-            <div className="flex h-10 min-w-0 flex-1 items-center justify-center rounded-xl border border-slate-200 px-3 text-lg font-bold text-[#1A2333]">
+            <div className="flex h-10 flex-1 items-center justify-center rounded-xl border border-slate-200 bg-white px-4 text-lg font-bold text-[#1A2333]">
               {configuration.quantity}
             </div>
             <button
               onClick={() => onConfigurationChange({ quantity: configuration.quantity + 1 })}
-              className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-100 text-slate-700"
+              className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-100 text-slate-700 transition hover:bg-slate-200"
             >
               <Plus className="h-4 w-4" />
             </button>
@@ -87,6 +89,7 @@ const ConfigureStep = ({
             value={configuration.billingCycle}
             options={selectedProduct.billingCycles}
             onChange={(value) => onConfigurationChange({ billingCycle: value })}
+            className="[&_select]:h-12 [&_select]:rounded-xl [&_select]:border-slate-200 [&_select]:bg-white [&_select]:px-4 [&_select]:text-base"
           />
         </div>
 
@@ -96,7 +99,7 @@ const ConfigureStep = ({
             {selectedProduct.addOns.map((addOn) => (
               <label
                 key={addOn.id}
-                className="flex cursor-pointer items-center justify-between rounded-xl border border-slate-200 px-4 py-3"
+                className="flex cursor-pointer items-center justify-between rounded-xl border border-slate-200 px-4 py-3 transition hover:border-slate-300 hover:bg-slate-50"
               >
                 <div className="flex items-center gap-3">
                   <input
@@ -114,8 +117,8 @@ const ConfigureStep = ({
         </div>
       </Panel>
 
-      <Panel className="h-fit p-5">
-        <h3 className="mb-5 text-2xl font-bold tracking-tight text-[#24355a]">Price Summary</h3>
+      <Panel className="h-fit rounded-[26px] p-5">
+        <h3 className="mb-5 text-[1.75rem] font-bold tracking-tight text-[#24355a]">Price Summary</h3>
         <div className="space-y-3 border-b border-slate-200 pb-5 text-sm text-slate-500">
           <div className="flex items-center justify-between">
             <span>Unit Price</span>
@@ -131,12 +134,12 @@ const ConfigureStep = ({
           </div>
         </div>
         <div className="py-5">
-          <div className="mb-1 text-sm font-semibold uppercase tracking-[0.2em] text-slate-400">Total</div>
-          <div className="text-4xl font-bold tracking-tight text-[#d90416]">{formatMoney(total)}</div>
+          <div className="mb-2 text-xs font-semibold uppercase tracking-[0.25em] text-slate-400">Total</div>
+          <div className="text-[2.4rem] font-bold tracking-tight text-[#d90416]">{formatMoney(total)}</div>
         </div>
         <button
           onClick={onAddToCart}
-          className="w-full rounded-xl bg-[#f97316] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#ea6a0a]"
+          className="w-full rounded-xl bg-[#f97316] px-4 py-3 text-sm font-semibold text-white transition hover:bg-[#ea6a0a]"
         >
           Add to Cart
         </button>

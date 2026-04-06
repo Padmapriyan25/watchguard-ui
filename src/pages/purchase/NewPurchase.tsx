@@ -47,7 +47,7 @@ const NewPurchase = () => {
   const filteredProducts = products.filter((product) => product.categoryId === selectedCategory);
 
   return (
-    <div className="mx-auto flex h-full max-w-6xl flex-col">
+    <div className="mx-auto flex h-full w-full max-w-[1100px] flex-col gap-4">
       <PurchaseStepper />
 
       {activeStep === 1 && (
