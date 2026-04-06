@@ -1,32 +1,39 @@
-export interface DashboardMetrics {
-  activeCustomers: { count: number; subtext: string };
-  activeSubscriptions: { count: number; subtext: string };
-  totalLicenses: { count: number; utilized: number; available: number };
-  outstandingBalance: { amount: number; dueText: string };
-  renewalsDue: { count: number; nextDate: string };
-}
+import { z } from 'zod';
 
-export interface Subscription {
-  id: string;
-  customer: string;
-  product: string;
-  category: { type: string; name: string };
-  licenses: number;
-  utilized: number;
-  status: 'Active' | 'Expiring Soon' | 'Expired';
-  renewal: string;
-}
+export const DashboardMetricsSchema = z.object({
+  activeCustomers: z.object({ count: z.number(), subtext: z.string() }),
+  activeSubscriptions: z.object({ count: z.number(), subtext: z.string() }),
+  totalLicenses: z.object({ count: z.number(), utilized: z.number(), available: z.number() }),
+  outstandingBalance: z.object({ amount: z.number(), dueText: z.string() }),
+  renewalsDue: z.object({ count: z.number(), nextDate: z.string() }),
+});
 
-export interface Invoice {
-  id: string;
-  description: string;
-  details: string;
-  amount: number;
-  date: string;
-  status: 'Paid' | 'Upcoming';
-}
+export const SubscriptionSchema = z.object({
+  id: z.string(),
+  customer: z.string(),
+  product: z.string(),
+  category: z.object({ type: z.string(), name: z.string() }),
+  licenses: z.number(),
+  utilized: z.number(),
+  status: z.enum(['Active', 'Expiring Soon', 'Expired']),
+  renewal: z.string(),
+});
 
-export interface HierarchyData {
-  parent: { name: string; percentage: number };
-  children: { id: string; name: string; percentage: number }[];
-}
+export const InvoiceSchema = z.object({
+  id: z.string(),
+  description: z.string(),
+  details: z.string(),
+  amount: z.number(),
+  date: z.string(),
+  status: z.enum(['Paid', 'Upcoming']),
+});
+
+export const HierarchyDataSchema = z.object({
+  parent: z.object({ name: z.string(), percentage: z.number() }),
+  children: z.array(z.object({ id: z.string(), name: z.string(), percentage: z.number() })),
+});
+
+export type DashboardMetrics = z.infer<typeof DashboardMetricsSchema>;
+export type Subscription = z.infer<typeof SubscriptionSchema>;
+export type Invoice = z.infer<typeof InvoiceSchema>;
+export type HierarchyData = z.infer<typeof HierarchyDataSchema>;

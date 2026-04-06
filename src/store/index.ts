@@ -1,11 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
 import dashboardReducer from './dashboardSlice';
 import purchaseReducer from './purchaseSlice';
+import renewalsReducer from './renewalsSlice';
+import billingReducer from './billingSlice';
 
 export const store = configureStore({
   reducer: {
     dashboard: dashboardReducer,
     purchase: purchaseReducer,
+    renewals: renewalsReducer,
+    billing: billingReducer,
   },
 });
 

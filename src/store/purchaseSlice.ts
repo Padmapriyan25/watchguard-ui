@@ -10,6 +10,8 @@ interface PurchaseState {
   categories: Category[];
   selectedCategory: string;
   products: Product[];
+  loading: boolean;
+  error: string | null;
 }
 
 const initialState: PurchaseState = {
@@ -18,7 +20,9 @@ const initialState: PurchaseState = {
   activeStep: 1,
   categories: purchaseCategoriesData,
   selectedCategory: purchaseCategoriesData[0].id,
-  products: productsData as Product[]
+  products: productsData as Product[],
+  loading: false,
+  error: null,
 };
 
 const purchaseSlice = createSlice({
@@ -33,9 +37,19 @@ const purchaseSlice = createSlice({
     },
     setActiveStep: (state, action: PayloadAction<number>) => {
       state.activeStep = action.payload;
-    }
+    },
+    setLoading: (state, action: PayloadAction<boolean>) => {
+      state.loading = action.payload;
+    },
+    setError: (state, action: PayloadAction<string | null>) => {
+      state.error = action.payload;
+      state.loading = false;
+    },
+    clearError: (state) => {
+      state.error = null;
+    },
   }
 });
 
-export const { setSelectedCustomer, setSelectedCategory, setActiveStep } = purchaseSlice.actions;
+export const { setSelectedCustomer, setSelectedCategory, setActiveStep, setLoading, setError, clearError } = purchaseSlice.actions;
 export default purchaseSlice.reducer;
