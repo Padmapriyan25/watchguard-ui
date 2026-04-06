@@ -315,24 +315,28 @@ export const purchaseStepsData = [
 
 export const renewalActionsData = [
   {
+    id: 'renew',
     title: 'Renew Existing Subscriptions',
     description: 'Extend your current subscriptions',
     iconId: 'refresh',
     iconBg: 'bg-blue-500',
   },
   {
+    id: 'add_seats',
     title: 'Add Licenses / Seats',
     description: 'Increase capacity for existing products',
     iconId: 'plus',
     iconBg: 'bg-green-500',
   },
   {
+    id: 'upgrade',
     title: 'Upgrade Tier / Level',
     description: 'Access advanced features',
     iconId: 'trending',
     iconBg: 'bg-purple-500',
   },
   {
+    id: 'browse',
     title: 'Browse New Products',
     description: 'Explore additional solutions',
     iconId: 'shopping',
@@ -359,6 +363,98 @@ export const renewalBenefitsData = [
   }
 ];
 
+export const renewalManagedSubscriptionsData = [
+  {
+    id: 'SUB-001',
+    customer: 'TechCorp Industries',
+    product: 'AuthPoint MFA',
+    category: 'Identity',
+    licenses: 200,
+    utilized: 178,
+    renewalDate: '6/30/2025',
+    renewalPrice: 700,
+    seatPrice: 3.5,
+  },
+  {
+    id: 'SUB-002',
+    customer: 'Financial Services Group',
+    product: 'Firebox T45 Bundle',
+    category: 'Network Security',
+    licenses: 50,
+    utilized: 50,
+    renewalDate: '5/3/2025',
+    renewalPrice: 12400,
+    seatPrice: 248,
+  },
+  {
+    id: 'SUB-003',
+    customer: 'TechCorp Industries',
+    product: 'DNSWatchGO',
+    category: 'Network Security',
+    licenses: 500,
+    utilized: 340,
+    renewalDate: '12/15/2025',
+    renewalPrice: 600,
+    seatPrice: 1.2,
+  },
+  {
+    id: 'SUB-004',
+    customer: 'Healthcare Plus',
+    product: 'WatchGuard Cloud',
+    category: 'Cloud',
+    licenses: 100,
+    utilized: 88,
+    renewalDate: '3/10/2026',
+    renewalPrice: 480,
+    seatPrice: 4.8,
+  },
+  {
+    id: 'SUB-005',
+    customer: 'Financial Services Group',
+    product: 'Panda Adaptive Defense 360',
+    category: 'Endpoint',
+    licenses: 350,
+    utilized: 320,
+    renewalDate: '8/20/2025',
+    renewalPrice: 1925,
+    seatPrice: 5.5,
+  },
+  {
+    id: 'SUB-006',
+    customer: 'Retail Solutions Inc',
+    product: 'WatchGuard EPDR',
+    category: 'Endpoint',
+    licenses: 200,
+    utilized: 185,
+    renewalDate: '7/15/2025',
+    renewalPrice: 840,
+    seatPrice: 4.2,
+  }
+];
+
+export const renewalTierPlansData = [
+  {
+    id: 'basic',
+    name: 'Basic',
+    monthlyPrice: 50,
+    features: ['Core Features', '24/7 Support'],
+    isCurrent: false,
+  },
+  {
+    id: 'professional',
+    name: 'Professional',
+    monthlyPrice: 100,
+    features: ['Core Features', '24/7 Support', 'Advanced Analytics'],
+    isCurrent: true,
+  },
+  {
+    id: 'enterprise',
+    name: 'Enterprise',
+    monthlyPrice: 150,
+    features: ['Core Features', '24/7 Support', 'Advanced Analytics', 'Dedicated Manager'],
+    isCurrent: false,
+  }
+];
 export const billingInvoicesData = [
   {
     customer: 'TechCorp Industries',
@@ -416,4 +512,79 @@ export const billingSummaryData = {
   lastPaymentAmount: '$12,400',
   lastPaymentDate: '3/1/2025',
   nextInvoiceDue: 'May 1, 2025'
+};
+
+export const sidebarPartnerData = {
+  tierLabel: 'Gold Partner',
+  managerLabel: 'Account Manager',
+  managerName: 'Sarah Mitchell',
+  supportLabel: 'Contact Support',
+  supportHref: '#'
+};
+
+export const purchaseReviewContent = {
+  billingEmail: 'john.smith@acmeit.com',
+  paymentLabel: 'Payment: Credit Card ****4242',
+  orderSummaryProductSuffix: 'product(s)',
+  deliveryText: 'Estimated delivery: Immediate',
+  termsLabel: 'I agree to the Terms & Conditions',
+  autoRenewLabel: 'Enable Auto-Renew for these subscriptions'
+};
+
+export const purchaseConfirmationData = {
+  title: 'Order Placed Successfully!',
+  emailMessage: 'A confirmation email has been sent to your registered email address.',
+  nextTitle: "What's Next?",
+  downloadLabel: 'Download Invoice',
+  restartLabel: 'Start Another Purchase',
+  nextSteps: [
+    {
+      id: 'provisioned',
+      iconId: 'check',
+      title: 'Account Provisioned',
+      description: 'Your services are being set up'
+    },
+    {
+      id: 'resources',
+      iconId: 'shopping',
+      title: 'Onboarding Resources',
+      description: 'Check your email for guides'
+    },
+    {
+      id: 'reminders',
+      iconId: 'bell',
+      title: 'Renewal Reminders',
+      description: "We'll notify you in advance"
+    }
+  ]
+};
+
+export const renewalsHeroData = {
+  title: 'Manage + Expand Subscriptions',
+  description: 'Select an action below to renew, expand, or enhance your WatchGuard services'
+};
+
+export const subscriptionsQuickActionsData = [
+  { id: 'invoices', title: 'View Invoices', subtitle: 'Pay outstanding', iconId: 'file', active: true },
+  { id: 'auto-renew', title: 'Auto-Renew', subtitle: 'Manage settings', iconId: 'rotate', active: false },
+  { id: 'promo', title: 'Promo Code', subtitle: 'Redeem code', iconId: 'ticket', active: false },
+  { id: 'support', title: 'Support', subtitle: 'Get help', iconId: 'support', active: false }
+];
+
+export const dashboardQuickActionsData = [
+  { id: 'purchase', title: 'New Purchase', iconId: 'shopping', border: 'border-blue-500' },
+  { id: 'renew', title: 'Renew', iconId: 'refresh', border: 'border-blue-500' },
+  { id: 'invoices', title: 'Invoices', iconId: 'file', border: 'border-gray-200' },
+  { id: 'support', title: 'Support', iconId: 'ticket', border: 'border-gray-200' }
+];
+
+export const accountExecutiveData = {
+  heading: 'Your Account Executive',
+  name: 'Sarah Mitchell',
+  role: 'WatchGuard Partner Success',
+  emailLabel: 'Email',
+  email: 'sarah.mitchell@watchguard.com',
+  phoneLabel: 'Phone',
+  phone: '+1 (206) 613-0895',
+  ctaLabel: 'Contact Me'
 };

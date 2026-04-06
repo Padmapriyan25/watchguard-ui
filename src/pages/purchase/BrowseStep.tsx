@@ -1,5 +1,6 @@
-import { ChevronDown, Lock } from 'lucide-react';
+import { Lock } from 'lucide-react';
 import type { Category, Product } from '../../models/purchaseModel';
+import { Panel, SelectField } from '../../components/common';
 import { categoryIcons, formatMoney, productIcons } from './purchaseUi';
 
 interface BrowseStepProps {
@@ -24,25 +25,17 @@ const BrowseStep = ({
   onSelectProduct,
 }: BrowseStepProps) => {
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm md:p-6">
+    <Panel className="p-5 md:p-6">
       <h2 className="mb-5 text-[1.75rem] font-bold text-[#1A2333]">Browse Products</h2>
 
       <div className="mb-6">
         <label className="mb-2 block text-sm font-semibold text-slate-700">Select Customer</label>
-        <div className="relative">
-          <select
-            value={selectedCustomer}
-            onChange={(e) => onCustomerChange(e.target.value)}
-            className="w-full appearance-none rounded-xl border border-slate-300 bg-white px-4 py-3 pr-10 text-slate-700 outline-none transition focus:border-[#007ac9] focus:ring-2 focus:ring-[#007ac9]/15"
-          >
-            {customers.map((customer) => (
-              <option key={customer} value={customer}>
-                {customer}
-              </option>
-            ))}
-          </select>
-          <ChevronDown className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
-        </div>
+        <SelectField
+          value={selectedCustomer}
+          options={customers}
+          onChange={onCustomerChange}
+          className="[&_select]:py-3"
+        />
       </div>
 
       <div className="mb-6 grid grid-cols-2 gap-3 md:grid-cols-4">
@@ -91,7 +84,7 @@ const BrowseStep = ({
           );
         })}
       </div>
-    </div>
+    </Panel>
   );
 };
 

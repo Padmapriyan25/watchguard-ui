@@ -1,5 +1,7 @@
 import { NavLink } from 'react-router-dom';
-import { Shield, Home, ShoppingCart, RefreshCw, FileText, Award, X } from 'lucide-react';
+import { Home, ShoppingCart, RefreshCw, FileText, Award, X } from 'lucide-react';
+import watchguardLogo from '../../assets/watchguard-logo.svg';
+import { sidebarPartnerData } from '../../data/mockData';
 
 interface SidebarProps {
   onClose?: () => void;
@@ -11,10 +13,15 @@ const Sidebar = ({ onClose }: SidebarProps) => {
 
   return (
     <div className="w-full lg:w-[260px] bg-[#2A3447] h-full text-slate-300 flex flex-col overflow-y-auto">
-      <div className="flex items-center justify-between px-6 h-[80px] shrink-0 border-b border-white/5">
-        <div className="flex items-center gap-2 text-white cursor-pointer">
-          <Shield className="w-8 h-8 text-[#E51E25]" />
-          <span className="font-bold text-xl tracking-tight">WatchGuard</span>
+      <div className="flex items-center justify-between px-5 h-[80px] shrink-0 border-b border-white/5">
+        <div className="flex items-center">
+          <div className="rounded-xl bg-white px-3 py-2 shadow-sm ring-1 ring-white/10">
+            <img
+              src={watchguardLogo}
+              alt="WatchGuard"
+              className="block h-7 w-auto max-w-[150px] object-contain"
+            />
+          </div>
         </div>
         {onClose && (
           <button onClick={onClose} className="lg:hidden p-2 -mr-2 text-slate-400 hover:text-white transition-colors rounded-lg hover:bg-white/10">
@@ -55,12 +62,12 @@ const Sidebar = ({ onClose }: SidebarProps) => {
       <div className="p-4 mx-4 mb-6 bg-[#1F293A] rounded-lg mt-auto shrink-0 border border-slate-700/50 shadow-inner">
         <div className="flex items-center gap-2 mb-2">
           <Award className="w-5 h-5 text-yellow-500" />
-          <span className="text-white font-semibold text-sm">Gold Partner</span>
+          <span className="text-white font-semibold text-sm">{sidebarPartnerData.tierLabel}</span>
         </div>
         <div className="text-xs">
-          <p className="text-slate-400 mb-1">Account Manager</p>
-          <p className="text-white font-medium">Sarah Mitchell</p>
-          <a href="#" className="text-blue-400 hover:text-blue-300 mt-1 inline-block font-medium">Contact Support</a>
+          <p className="text-slate-400 mb-1">{sidebarPartnerData.managerLabel}</p>
+          <p className="text-white font-medium">{sidebarPartnerData.managerName}</p>
+          <a href={sidebarPartnerData.supportHref} className="text-blue-400 hover:text-blue-300 mt-1 inline-block font-medium">{sidebarPartnerData.supportLabel}</a>
         </div>
       </div>
     </div>

@@ -1,4 +1,5 @@
 import type { CartItem, OrderTotals } from '../../models/purchaseModel';
+import { purchaseReviewContent } from '../../data/mockData';
 import { formatMoney } from './purchaseUi';
 
 interface ReviewStepProps {
@@ -33,16 +34,16 @@ const ReviewStep = ({
           <h3 className="mb-3 text-lg font-bold text-[#24355a]">Billing Details</h3>
           <div className="space-y-1.5 text-sm text-slate-500">
             <p>{selectedCustomer}</p>
-            <p>john.smith@acmeit.com</p>
-            <p>Payment: Credit Card ****4242</p>
+            <p>{purchaseReviewContent.billingEmail}</p>
+            <p>{purchaseReviewContent.paymentLabel}</p>
           </div>
         </div>
         <div className="rounded-xl border border-slate-200 p-4">
           <h3 className="mb-3 text-lg font-bold text-[#24355a]">Order Summary</h3>
           <div className="space-y-1.5 text-sm text-slate-500">
-            <p>{cart.length} product(s)</p>
+            <p>{cart.length} {purchaseReviewContent.orderSummaryProductSuffix}</p>
             <p>Total: {formatMoney(totals.total)}</p>
-            <p className="text-[#22c55e]">Estimated delivery: Immediate</p>
+            <p className="text-[#22c55e]">{purchaseReviewContent.deliveryText}</p>
           </div>
         </div>
       </div>
@@ -54,7 +55,7 @@ const ReviewStep = ({
           onChange={(e) => onAcceptedTermsChange(e.target.checked)}
           className="h-4 w-4 rounded border-slate-300"
         />
-        I agree to the Terms & Conditions
+        {purchaseReviewContent.termsLabel}
       </label>
 
       <label className="mt-3 flex items-center gap-3 rounded-xl border border-slate-200 px-4 py-3 text-sm text-slate-700">
@@ -64,7 +65,7 @@ const ReviewStep = ({
           onChange={(e) => onAutoRenewChange(e.target.checked)}
           className="h-4 w-4 rounded border-slate-300"
         />
-        Enable Auto-Renew for these subscriptions
+        {purchaseReviewContent.autoRenewLabel}
       </label>
 
       <div className="mt-6 flex flex-col gap-3 md:flex-row">

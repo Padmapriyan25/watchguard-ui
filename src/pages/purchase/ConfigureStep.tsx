@@ -1,5 +1,6 @@
-import { ChevronDown, ChevronLeft, Minus, Plus } from 'lucide-react';
+import { ChevronLeft, Minus, Plus } from 'lucide-react';
 import type { Product, PurchaseConfig } from '../../models/purchaseModel';
+import { Panel, SelectField } from '../../components/common';
 import { formatMoney } from './purchaseUi';
 
 interface ConfigureStepProps {
@@ -26,7 +27,7 @@ const ConfigureStep = ({
 
   return (
     <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_280px]">
-      <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm md:p-6">
+      <Panel className="p-5 md:p-6">
         <button onClick={onBack} className="mb-5 inline-flex items-center gap-2 text-sm font-medium text-[#007ac9]">
           <ChevronLeft className="h-4 w-4" />
           Back to Products
@@ -82,20 +83,11 @@ const ConfigureStep = ({
 
         <div className="mb-6">
           <label className="mb-3 block text-sm font-semibold text-slate-700">Billing Cycle</label>
-          <div className="relative">
-            <select
-              value={configuration.billingCycle}
-              onChange={(e) => onConfigurationChange({ billingCycle: e.target.value })}
-              className="w-full appearance-none rounded-xl border border-slate-300 bg-white px-4 py-2.5 pr-10 text-sm text-slate-700 outline-none transition focus:border-[#007ac9] focus:ring-2 focus:ring-[#007ac9]/15"
-            >
-              {selectedProduct.billingCycles.map((cycle) => (
-                <option key={cycle} value={cycle}>
-                  {cycle}
-                </option>
-              ))}
-            </select>
-            <ChevronDown className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
-          </div>
+          <SelectField
+            value={configuration.billingCycle}
+            options={selectedProduct.billingCycles}
+            onChange={(value) => onConfigurationChange({ billingCycle: value })}
+          />
         </div>
 
         <div>
@@ -120,9 +112,9 @@ const ConfigureStep = ({
             ))}
           </div>
         </div>
-      </div>
+      </Panel>
 
-      <div className="h-fit rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+      <Panel className="h-fit p-5">
         <h3 className="mb-5 text-2xl font-bold tracking-tight text-[#24355a]">Price Summary</h3>
         <div className="space-y-3 border-b border-slate-200 pb-5 text-sm text-slate-500">
           <div className="flex items-center justify-between">
@@ -148,7 +140,7 @@ const ConfigureStep = ({
         >
           Add to Cart
         </button>
-      </div>
+      </Panel>
     </div>
   );
 };
