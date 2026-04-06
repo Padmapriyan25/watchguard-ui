@@ -20,7 +20,7 @@ export const ProductSchema = z.object({
   priceValue: z.number(),
   priceUnit: z.string(),
   categoryId: z.string(),
-  icon: z.enum(['flame', 'shield', 'globe', 'lock']),
+  icon: z.enum(['flame', 'shield', 'globe', 'lock', 'cloud', 'monitor', 'search', 'user']),
   billingCycles: z.array(z.string()),
   termDiscounts: z.record(z.string(), z.number()),
   addOns: z.array(AddOnSchema),

@@ -45,7 +45,7 @@ const BrowseStep = ({
         </div>
       </div>
 
-      <div className="mb-6 grid grid-cols-2 gap-3 xl:grid-cols-4">
+      <div className="mb-6 grid grid-cols-2 gap-3 md:grid-cols-4">
         {categories.map((category) => {
           const isActive = category.id === selectedCategory;
           const Icon = categoryIcons[category.id as keyof typeof categoryIcons] ?? Lock;
@@ -54,26 +54,26 @@ const BrowseStep = ({
             <button
               key={category.id}
               onClick={() => onCategoryChange(category.id)}
-              className={`rounded-xl border bg-white p-4 text-left transition ${
+              className={`rounded-xl border bg-white p-4 text-center transition ${
                 isActive
-                  ? 'border-[#ff5a4d] shadow-[0_0_0_1px_rgba(255,90,77,0.2)]'
+                  ? 'border-[#ff5a4d] shadow-[0_0_0_1px_rgba(255,90,77,0.2)] bg-[#fff8f7]'
                   : 'border-slate-200 hover:border-slate-300'
               }`}
             >
-              <Icon className={`mb-3 h-7 w-7 ${category.accent}`} />
+              <Icon className={`mx-auto mb-3 h-7 w-7 ${category.accent}`} />
               <div className="text-base font-bold text-[#1A2333]">{category.name}</div>
             </button>
           );
         })}
       </div>
 
-      <div className="grid grid-cols-1 gap-4 xl:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
         {filteredProducts.map((product) => {
           const Icon = productIcons[product.icon];
 
           return (
-            <div key={product.id} className="flex flex-col rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-              <Icon className="mb-4 h-7 w-7 text-[#f97316]" />
+            <div key={product.id} className="flex min-h-[230px] flex-col rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+              <Icon className="mb-4 h-7 w-7 text-[#4b5563]" />
               <h3 className="mb-2 text-2xl font-bold tracking-tight text-[#24355a]">{product.name}</h3>
               <p className="mb-6 flex-1 text-sm leading-6 text-slate-500">{product.description}</p>
               <div className="mb-4">

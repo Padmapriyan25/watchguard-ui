@@ -1,4 +1,4 @@
-import { Cloud, Flame, Globe, Lock, Shield, UserRound } from 'lucide-react';
+import { Cloud, Flame, Globe, Lock, Monitor, Search, Shield, UserRound } from 'lucide-react';
 
 export const formatMoney = (value: number) =>
   new Intl.NumberFormat('en-US', {
@@ -20,4 +20,8 @@ export const productIcons = {
   shield: Shield,
   globe: Globe,
   lock: Lock,
+  cloud: Cloud,
+  monitor: Monitor,
+  search: Search,
+  user: UserRound,
 };

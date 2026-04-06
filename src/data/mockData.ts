@@ -14,7 +14,7 @@ export const dashboardMetrics = {
 };
 
 export const subscriptionsData = [
-  { 
+  {
     id: 'SUB-001',
     customer: 'TechCorp Industries',
     product: 'AuthPoint MFA',
@@ -27,7 +27,7 @@ export const subscriptionsData = [
     autoRenew: true,
     renewal: '6/30/2025'
   },
-  { 
+  {
     id: 'SUB-002',
     customer: 'Financial Services Group',
     product: 'Firebox T45 Bundle',
@@ -40,7 +40,7 @@ export const subscriptionsData = [
     autoRenew: false,
     renewal: '5/3/2025'
   },
-  { 
+  {
     id: 'SUB-003',
     customer: 'TechCorp Industries',
     product: 'DNSWatchGO',
@@ -109,8 +109,8 @@ export const hierarchyData = {
 };
 
 export const purchaseCustomersData = [
-  'TechCorp Industries - Technology', 
-  'Acme IT Solutions', 
+  'TechCorp Industries - Technology',
+  'Acme IT Solutions',
   'Financial Services Group'
 ];
 
@@ -151,7 +151,7 @@ export const productsData = [
     priceValue: 899,
     priceUnit: '/user/yr',
     categoryId: 'network_security',
-    icon: 'shield',
+    icon: 'lock',
     billingCycles: ['Annual Upfront', 'Monthly'],
     termDiscounts: {
       '1': 0,
@@ -170,7 +170,7 @@ export const productsData = [
     priceTag: 'Starting from',
     priceValue: 1.2,
     priceUnit: '/user/yr',
-    categoryId: 'cloud',
+    categoryId: 'network_security',
     icon: 'globe',
     billingCycles: ['Annual Upfront', 'Monthly'],
     termDiscounts: {
@@ -185,14 +185,74 @@ export const productsData = [
   },
   {
     id: 'p4',
-    name: 'AuthPoint MFA',
-    description: 'Multi-factor authentication to protect identities and critical apps',
+    name: 'Panda Adaptive Defense 360',
+    description: 'Advanced endpoint protection with EDR capabilities',
     priceTag: 'Starting from',
-    priceValue: 4.5,
-    priceUnit: '/user/mo',
+    priceValue: 5.5,
+    priceUnit: '/user/yr',
+    categoryId: 'endpoint',
+    icon: 'shield',
+    billingCycles: ['Annual Upfront', 'Monthly'],
+    termDiscounts: {
+      '1': 0,
+      '2': 0.05,
+      '3': 0.1
+    },
+    addOns: [
+      { id: 'threat-hunting', name: 'Threat Hunting', price: 0.8 },
+      { id: 'incident-support', name: 'Incident Response Support', price: 1.2 }
+    ]
+  },
+  {
+    id: 'p5',
+    name: 'WatchGuard EPDR',
+    description: 'Endpoint detection and response with zero-trust application service',
+    priceTag: 'Starting from',
+    priceValue: 4.2,
+    priceUnit: '/user/yr',
+    categoryId: 'endpoint',
+    icon: 'monitor',
+    billingCycles: ['Annual Upfront', 'Monthly'],
+    termDiscounts: {
+      '1': 0,
+      '2': 0.04,
+      '3': 0.08
+    },
+    addOns: [
+      { id: 'device-control', name: 'Advanced Device Control', price: 0.4 },
+      { id: 'host-isolation', name: 'Host Isolation Controls', price: 0.7 }
+    ]
+  },
+  {
+    id: 'p6',
+    name: 'WatchGuard EDR',
+    description: 'Essential endpoint detection and response for threat hunting',
+    priceTag: 'Starting from',
+    priceValue: 3.8,
+    priceUnit: '/user/yr',
+    categoryId: 'endpoint',
+    icon: 'search',
+    billingCycles: ['Annual Upfront', 'Monthly'],
+    termDiscounts: {
+      '1': 0,
+      '2': 0.03,
+      '3': 0.06
+    },
+    addOns: [
+      { id: 'forensics', name: 'Forensics Pack', price: 0.5 },
+      { id: 'extended-retention', name: 'Extended Retention', price: 0.3 }
+    ]
+  },
+  {
+    id: 'p7',
+    name: 'AuthPoint MFA',
+    description: 'Multi-factor authentication for cloud and on-premise applications',
+    priceTag: 'Starting from',
+    priceValue: 3.5,
+    priceUnit: '/user/yr',
     categoryId: 'identity',
     icon: 'lock',
-    billingCycles: ['Monthly', 'Annual Upfront'],
+    billingCycles: ['Annual Upfront', 'Monthly'],
     termDiscounts: {
       '1': 0,
       '2': 0.05,
@@ -201,6 +261,46 @@ export const productsData = [
     addOns: [
       { id: 'risk-insights', name: 'Risk Insights', price: 1.1 },
       { id: 'vip-support', name: 'VIP Support', price: 0.5 }
+    ]
+  },
+  {
+    id: 'p8',
+    name: 'AuthPoint Total Identity Security',
+    description: 'Complete identity security with MFA, SSO, and password management',
+    priceTag: 'Starting from',
+    priceValue: 5.9,
+    priceUnit: '/user/yr',
+    categoryId: 'identity',
+    icon: 'user',
+    billingCycles: ['Annual Upfront', 'Monthly'],
+    termDiscounts: {
+      '1': 0,
+      '2': 0.06,
+      '3': 0.13
+    },
+    addOns: [
+      { id: 'password-vault', name: 'Password Vault', price: 0.8 },
+      { id: 'sso-app-pack', name: 'SSO App Pack', price: 0.9 }
+    ]
+  },
+  {
+    id: 'p9',
+    name: 'WatchGuard Cloud',
+    description: 'Unified cloud platform for security management and visibility',
+    priceTag: 'Starting from',
+    priceValue: 4.8,
+    priceUnit: '/user/yr',
+    categoryId: 'cloud',
+    icon: 'cloud',
+    billingCycles: ['Annual Upfront', 'Monthly'],
+    termDiscounts: {
+      '1': 0,
+      '2': 0.04,
+      '3': 0.09
+    },
+    addOns: [
+      { id: 'log-retention', name: 'Extended Log Retention', price: 0.6 },
+      { id: 'compliance-reports', name: 'Compliance Reports', price: 0.7 }
     ]
   }
 ];
