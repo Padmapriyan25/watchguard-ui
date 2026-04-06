@@ -1,5 +1,6 @@
 import type { CartItem, OrderTotals } from '../../models/purchaseModel';
 import { purchaseReviewContent } from '../../data/mockData';
+import { Panel } from '../../components/common';
 import { formatMoney } from './purchaseUi';
 
 interface ReviewStepProps {
@@ -26,7 +27,7 @@ const ReviewStep = ({
   onPlaceOrder,
 }: ReviewStepProps) => {
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm md:p-6">
+    <Panel className="w-full p-5 md:p-6">
       <h2 className="mb-5 text-[1.75rem] font-bold text-[#1A2333]">Review Order Summary</h2>
 
       <div className="grid gap-4 lg:grid-cols-2">
@@ -80,7 +81,7 @@ const ReviewStep = ({
           Place Order {'->'}
         </button>
       </div>
-    </div>
+    </Panel>
   );
 };
 

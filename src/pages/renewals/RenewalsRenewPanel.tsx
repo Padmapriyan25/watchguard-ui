@@ -15,7 +15,7 @@ const RenewalsRenewPanel = ({ subscriptions, selectedIds, onToggle, headerRight 
     <Panel>
       <div className="mb-4 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
         <h3 className="text-xl font-bold text-[#24355a]">Subscriptions Due for Renewal</h3>
-        {headerRight}
+        <div className="w-full md:w-auto">{headerRight}</div>
       </div>
 
       <div className="space-y-3">
@@ -39,7 +39,7 @@ const RenewalsRenewPanel = ({ subscriptions, selectedIds, onToggle, headerRight 
                 </div>
               </div>
             </div>
-            <div className="text-right md:min-w-[110px]">
+            <div className="text-left md:min-w-[110px] md:text-right">
               <div className="font-bold text-[#24355a]">{formatRenewalMoney(subscription.renewalPrice, true)}</div>
               <div className="text-xs text-slate-400">per year</div>
             </div>

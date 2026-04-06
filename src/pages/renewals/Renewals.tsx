@@ -42,10 +42,6 @@ const Renewals = () => {
 
   return (
     <div className="mx-auto flex h-full max-w-6xl flex-col gap-5">
-      <div>
-        <p className="text-sm text-slate-400">Partner Portal / Renewals &amp; Account Management</p>
-      </div>
-
       <RenewalsHero />
 
       <RenewalsActionCards

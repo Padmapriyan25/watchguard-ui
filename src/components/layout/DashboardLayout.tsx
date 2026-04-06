@@ -32,7 +32,7 @@ const DashboardLayout = () => {
         <Sidebar onClose={() => setIsMobileMenuOpen(false)} />
       </aside>
 
-      <div className="relative flex min-h-screen w-full flex-1 flex-col transition-all duration-300 ease-in-out lg:ml-[260px]">
+      <div className="relative flex min-h-screen min-w-0 flex-1 flex-col transition-all duration-300 ease-in-out lg:ml-[260px]">
         <Header
           title={headerTitle}
           onMenuClick={() => setIsMobileMenuOpen(true)}
@@ -41,13 +41,13 @@ const DashboardLayout = () => {
           userInitials={headerUserData.initials}
         />
 
-        <main className="relative flex-1 overflow-y-auto px-4 pb-16 pt-4 md:px-6 md:pt-5 lg:px-8 lg:pb-8">
-          <div className="mx-auto flex w-full max-w-[1320px] flex-col gap-5">
+        <main className="relative flex-1 overflow-y-auto px-4 pb-10 pt-4 md:px-6 md:pt-5 lg:px-8 lg:pb-6">
+          <div className="mx-auto flex min-w-0 w-full max-w-[1320px] flex-col gap-5">
             <Outlet />
           </div>
         </main>
 
-        <footer className="mx-4 mb-4 rounded-[22px] border border-white/60 bg-[#2d374f]/92 px-5 py-4 text-center text-xs text-slate-300 shadow-[0_20px_50px_-35px_rgba(15,23,42,0.7)] md:mx-6 md:text-sm lg:mx-8">
+        <footer className="mt-auto border-t border-[#24314d] bg-[#25314c] px-4 py-4 text-center text-[11px] text-slate-300 md:px-6 lg:px-8">
           Copyright (c) 2025 WatchGuard Technologies, Inc. All Rights Reserved
         </footer>
       </div>

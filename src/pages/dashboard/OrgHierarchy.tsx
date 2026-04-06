@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { ChevronDown, ChevronRight, Network } from 'lucide-react';
+import { ChevronDown, ChevronRight } from 'lucide-react';
 import { useSelector } from 'react-redux';
 import type { RootState } from '../../store';
 import type { HierarchyNode } from '../../models/dashboardModel';
@@ -80,26 +80,22 @@ const OrgHierarchy = () => {
   };
 
   return (
-    <div className="app-panel mt-2 p-6">
+    <div className="app-panel mt-1 p-5">
       <div className="mb-6 flex items-center justify-between gap-3">
         <div>
-          <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-slate-400">
-            <Network className="h-4 w-4 text-[#4f7fff]" />
-            Customer structure
-          </div>
-          <h2 className="mt-2 text-lg font-bold text-slate-800">Organization Hierarchy</h2>
+          <h2 className="text-sm font-semibold text-slate-800">Organization Hierarchy</h2>
         </div>
       </div>
 
-      <div className="overflow-x-auto rounded-[24px] border border-white/80 bg-white/60 p-4">
+      <div className="overflow-x-auto rounded-[20px] border border-white/80 bg-white/60 p-4">
         <div className="min-w-[720px]">
           <TreeRow node={root} expandedIds={expandedIds} onToggle={handleToggle} />
         </div>
       </div>
 
-      <div className="mt-6 flex items-center justify-between border-t border-slate-100 pt-4 text-sm text-slate-500">
-        <span>Click the disclosure buttons to expand and explore the hierarchy</span>
-        <button onClick={handleExpandAll} className="font-medium text-[#4f7fff] hover:text-[#315edf]">
+      <div className="mt-4 flex items-center justify-between border-t border-slate-100 pt-4 text-xs text-slate-500">
+        <span>Click bars to expand and explore the hierarchy</span>
+        <button onClick={handleExpandAll} className="font-semibold text-[#4f7fff] hover:text-[#315edf]">
           {allExpanded ? 'Collapse All' : 'Expand All'}
         </button>
       </div>

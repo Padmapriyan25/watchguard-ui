@@ -51,20 +51,20 @@ const SummaryCards = () => {
   ];
 
   return (
-    <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-5">
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-5">
       {cards.map((card, idx) => {
         const Icon = card.icon;
 
         return (
-          <div key={idx} className="app-panel overflow-hidden p-5">
-            <div className="flex items-start justify-between gap-4">
-              <div className={`flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br ${card.accent}`}>
-                <Icon className={`h-6 w-6 ${card.iconClass}`} />
-              </div>
+          <div key={idx} className="app-panel overflow-hidden p-5 lg:p-6">
+            <div className={`flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br ${card.accent}`}>
+              <Icon className={`h-5 w-5 ${card.iconClass}`} />
             </div>
-            <div className="mt-5 text-3xl font-bold tracking-tight text-slate-800">{card.value}</div>
+            <div className="mt-4 text-3xl font-bold tracking-tight text-slate-800">{card.value}</div>
             <div className="mt-1 text-sm font-semibold text-slate-700">{card.title}</div>
-            <div className={`mt-2 text-xs ${card.subtextClass || 'text-slate-500'}`}>{card.subtext}</div>
+            <div className={`mt-2 text-xs ${card.subtextClass || 'text-slate-500'}`}>
+              {card.subtext}
+            </div>
           </div>
         );
       })}

@@ -69,7 +69,7 @@ const ConfigureStep = ({
             >
               <Minus className="h-4 w-4" />
             </button>
-            <div className="flex h-10 flex-1 items-center justify-center rounded-xl border border-slate-200 text-lg font-bold text-[#1A2333]">
+            <div className="flex h-10 min-w-0 flex-1 items-center justify-center rounded-xl border border-slate-200 px-3 text-lg font-bold text-[#1A2333]">
               {configuration.quantity}
             </div>
             <button

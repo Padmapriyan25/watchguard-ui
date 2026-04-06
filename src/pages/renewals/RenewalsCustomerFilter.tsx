@@ -7,7 +7,7 @@ interface RenewalsCustomerFilterProps {
 }
 
 const RenewalsCustomerFilter = ({ value, options, onChange }: RenewalsCustomerFilterProps) => {
-  return <SelectField value={value} options={options} onChange={onChange} className="min-w-[180px]" />;
+  return <SelectField value={value} options={options} onChange={onChange} className="w-full sm:min-w-[180px] sm:w-auto" />;
 };
 
 export default RenewalsCustomerFilter;

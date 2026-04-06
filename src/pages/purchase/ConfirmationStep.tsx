@@ -1,6 +1,7 @@
 import { Bell, CheckCircle2, Download, ShoppingCart } from 'lucide-react';
 import type { PlacedOrder } from '../../models/purchaseModel';
 import { purchaseConfirmationData } from '../../data/mockData';
+import { Panel } from '../../components/common';
 
 interface ConfirmationStepProps {
   placedOrder: PlacedOrder | null;
@@ -20,8 +21,8 @@ const getStepIcon = (iconId: string) => {
 
 const ConfirmationStep = ({ placedOrder, onRestart }: ConfirmationStepProps) => {
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white px-6 py-10 shadow-sm md:px-8">
-      <div className="mx-auto max-w-2xl text-center">
+    <Panel className="w-full px-6 py-10 md:px-8">
+      <div className="mx-auto w-full max-w-4xl text-center">
         <CheckCircle2 className="mx-auto mb-5 h-16 w-16 text-[#22c55e]" />
         <h2 className="text-4xl font-bold tracking-tight text-[#24355a]">{purchaseConfirmationData.title}</h2>
         <p className="mt-4 text-lg text-slate-500">
@@ -52,7 +53,7 @@ const ConfirmationStep = ({ placedOrder, onRestart }: ConfirmationStepProps) => 
           </button>
         </div>
       </div>
-    </div>
+    </Panel>
   );
 };
 

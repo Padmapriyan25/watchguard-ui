@@ -13,8 +13,8 @@ const Sidebar = ({ onClose }: SidebarProps) => {
 
   return (
     <div className="flex h-full w-full flex-col overflow-y-auto bg-[linear-gradient(180deg,#27324a_0%,#20283d_100%)] px-4 py-4 text-slate-300 lg:w-[260px]">
-      <div className="flex min-h-[78px] items-center justify-between rounded-[24px] border border-white/10 bg-white/6 px-4">
-        <div className="flex items-center gap-3">
+      <div className="relative flex min-h-[58px] items-center justify-center rounded-[24px] border border-white/10 bg-white/6 px-4">
+        <div className="flex items-center justify-center">
           <img
             src={watchguardLogo}
             alt="WatchGuard"
@@ -22,7 +22,7 @@ const Sidebar = ({ onClose }: SidebarProps) => {
           />
         </div>
         {onClose && (
-          <button onClick={onClose} className="rounded-2xl p-2 text-slate-400 transition-colors hover:bg-white/10 hover:text-white lg:hidden">
+          <button onClick={onClose} className="absolute right-4 rounded-2xl p-2 text-slate-400 transition-colors hover:bg-white/10 hover:text-white lg:hidden">
             <X className="h-6 w-6" />
           </button>
         )}

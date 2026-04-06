@@ -1,4 +1,4 @@
-import { Download, ReceiptText } from 'lucide-react';
+import { Download } from 'lucide-react';
 import { billingInvoicesData } from '../../data/mockData';
 
 const InvoicesTable = () => {
@@ -6,11 +6,7 @@ const InvoicesTable = () => {
     <div className="app-panel flex h-full flex-col p-4 sm:p-6">
       <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-slate-400">
-            <ReceiptText className="h-4 w-4 text-[#f15a3d]" />
-            Billing center
-          </div>
-          <h2 className="mt-2 text-lg font-semibold text-[#1A2333] sm:text-xl">Invoices</h2>
+          <h2 className="text-lg font-semibold text-[#1A2333] sm:text-xl">Invoices</h2>
         </div>
       </div>
 
@@ -26,7 +22,7 @@ const InvoicesTable = () => {
         </select>
       </div>
 
-      <div className="overflow-x-auto rounded-[22px] border border-white/80 bg-white/60">
+      <div className="hidden overflow-x-auto rounded-[22px] border border-white/80 bg-white/60 sm:block">
         <table className="w-full min-w-[700px] text-left text-sm">
           <thead className="bg-white/60 text-xs font-semibold uppercase tracking-[0.18em] text-gray-500">
             <tr>

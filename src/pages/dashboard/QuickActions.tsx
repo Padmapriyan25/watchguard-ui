@@ -19,20 +19,19 @@ const getIcon = (iconId: string, border: string) => {
 
 const QuickActions = () => {
   return (
-    <div className="app-panel flex h-full flex-col p-6">
+    <div className="app-panel flex h-full flex-col p-5">
       <div className="mb-4">
         <div>
-          <h2 className="text-lg font-bold text-slate-800">Quick Actions</h2>
-          <p className="text-sm text-slate-500">Common tasks in a cleaner flow.</p>
+          <h2 className="text-[1.02rem] font-semibold tracking-tight text-slate-800">Quick Actions</h2>
         </div>
       </div>
-      <div className="grid flex-1 grid-cols-2 gap-4">
+      <div className="grid flex-1 grid-cols-2 gap-3">
         {dashboardQuickActionsData.map((action) => (
-          <button key={action.id} className="rounded-[22px] border border-white/70 bg-[linear-gradient(180deg,rgba(255,255,255,0.95),rgba(247,249,252,0.9))] p-4 text-left transition hover:-translate-y-0.5 hover:shadow-[0_18px_35px_-26px_rgba(15,23,42,0.4)]">
-            <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-2xl bg-slate-50">
+          <button key={action.id} className={`flex min-h-[78px] flex-col items-center justify-center rounded-[10px] border bg-white p-3 sm:min-h-[84px] sm:p-4 text-center transition ${action.border.includes('blue') ? 'border-[#0f80ff] text-[#0f66dc]' : 'border-slate-300 text-slate-700'} hover:bg-slate-50`}>
+            <div className="mx-auto mb-2 flex h-8 w-8 items-center justify-center rounded-full">
               {getIcon(action.iconId, action.border)}
             </div>
-            <span className="text-sm font-semibold text-slate-700">{action.title}</span>
+            <span className="text-[11px] font-medium">{action.title}</span>
           </button>
         ))}
       </div>

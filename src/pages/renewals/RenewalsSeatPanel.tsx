@@ -16,7 +16,7 @@ const RenewalsSeatPanel = ({ subscriptions, seatQuantities, onQuantityChange, he
     <Panel>
       <div className="mb-4 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
         <h3 className="text-xl font-bold text-[#24355a]">Add Licenses to Existing Subscriptions</h3>
-        {headerRight}
+        <div className="w-full md:w-auto">{headerRight}</div>
       </div>
 
       <div className="space-y-4">
@@ -33,13 +33,13 @@ const RenewalsSeatPanel = ({ subscriptions, seatQuantities, onQuantityChange, he
                     Current: {subscription.utilized} / {subscription.licenses} licenses
                   </div>
                 </div>
-                <div className="text-right md:min-w-[120px]">
+                <div className="text-left md:min-w-[120px] md:text-right">
                   <div className="text-sm font-semibold text-slate-500">{formatRenewalMoney(subscription.seatPrice)}/license/year</div>
                 </div>
               </div>
 
               <div className="mt-4 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-                <div className="flex items-center gap-3">
+                <div className="flex flex-wrap items-center gap-3">
                   <span className="text-sm text-slate-500">Add licenses:</span>
                   <div className="flex items-center gap-2">
                     <button
@@ -59,7 +59,7 @@ const RenewalsSeatPanel = ({ subscriptions, seatQuantities, onQuantityChange, he
                     </button>
                   </div>
                 </div>
-                <button className="rounded-lg bg-[#007ac9] px-4 py-2 text-sm font-semibold text-white hover:bg-[#0064a8]">
+                <button className="w-full rounded-lg bg-[#007ac9] px-4 py-2 text-sm font-semibold text-white hover:bg-[#0064a8] md:w-auto">
                   Add to Cart
                 </button>
               </div>
