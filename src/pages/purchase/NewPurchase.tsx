@@ -1,4 +1,3 @@
-import React from 'react';
 import PurchaseStepper from './PurchaseStepper';
 import CategorySelector from './CategorySelector';
 import ProductGrid from './ProductGrid';

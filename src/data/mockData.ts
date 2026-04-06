@@ -1,3 +1,10 @@
+export const headerUserData = {
+  name: 'John Doe',
+  role: 'MSP Admin',
+  initials: 'JD',
+  email: 'john.doe@msp-portal.com'
+};
+
 export const dashboardMetrics = {
   activeCustomers: { count: 124, subtext: '+12 this month' },
   activeSubscriptions: { count: 856, subtext: '+45 this month' },

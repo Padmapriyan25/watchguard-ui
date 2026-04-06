@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import Header from './Header';
+import { headerUserData } from '../../data/mockData';
 
 const DashboardLayout = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -29,7 +30,13 @@ const DashboardLayout = () => {
 
       {/* Main Content Area */}
       <div className="flex-1 lg:ml-[260px] flex flex-col relative min-h-screen w-full transition-all duration-300 ease-in-out">
-        <Header title={headerTitle} onMenuClick={() => setIsMobileMenuOpen(true)} />
+        <Header 
+          title={headerTitle} 
+          onMenuClick={() => setIsMobileMenuOpen(true)}
+          userName={headerUserData.name}
+          userRole={headerUserData.role}
+          userInitials={headerUserData.initials}
+        />
         
         <main className="flex-1 p-4 md:p-6 lg:p-8 overflow-y-auto relative pb-24 lg:pb-8">
           <div className="max-w-7xl mx-auto w-full">

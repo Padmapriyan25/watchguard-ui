@@ -1,4 +1,3 @@
-import React from 'react';
 import InvoicesTable from './InvoicesTable';
 import BillingSummary from './BillingSummary';
 import PaymentMethods from './PaymentMethods';

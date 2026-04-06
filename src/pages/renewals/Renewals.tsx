@@ -1,4 +1,3 @@
-import React from 'react';
 import { RefreshCw, Plus, TrendingUp, ShoppingCart, CheckCircle2 } from 'lucide-react';
 import { renewalActionsData, renewalBenefitsData } from '../../data/mockData';
 import { Card } from '../../components/common';

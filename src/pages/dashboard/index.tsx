@@ -1,4 +1,3 @@
-import React from 'react';
 import SummaryCards from './SummaryCards';
 import ActiveSubscriptions from './ActiveSubscriptions';
 import AccountHealth from './AccountHealth';

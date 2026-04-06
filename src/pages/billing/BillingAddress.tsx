@@ -1,4 +1,3 @@
-import React from 'react';
 import { billingAddressData } from '../../data/mockData';
 
 const BillingAddress = () => {

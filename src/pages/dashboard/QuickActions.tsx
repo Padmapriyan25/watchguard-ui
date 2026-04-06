@@ -1,4 +1,3 @@
-import React from 'react';
 import { ShoppingCart, RefreshCw, FileText, Ticket } from 'lucide-react';
 
 const QuickActions = () => {

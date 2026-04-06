@@ -1,4 +1,3 @@
-import React from 'react';
 import { CreditCard, Plus } from 'lucide-react';
 import { defaultPaymentMethod } from '../../data/mockData';
 

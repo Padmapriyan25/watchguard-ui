@@ -1,4 +1,3 @@
-import React from 'react';
 import { billingSummaryData } from '../../data/mockData';
 
 const BillingSummary = () => {

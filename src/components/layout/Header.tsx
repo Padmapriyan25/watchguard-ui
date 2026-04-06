@@ -3,9 +3,12 @@ import { Bell, Search, Menu } from 'lucide-react';
 interface HeaderProps {
   title: string;
   onMenuClick?: () => void;
+  userName?: string;
+  userRole?: string;
+  userInitials?: string;
 }
 
-const Header = ({ title, onMenuClick }: HeaderProps) => {
+const Header = ({ title, onMenuClick, userName = 'John Doe', userRole = 'MSP Admin', userInitials = 'JD' }: HeaderProps) => {
   return (
     <header className="h-[80px] bg-white border-b border-gray-200 shadow-sm flex items-center justify-between px-4 md:px-8 shrink-0">
       <div className="flex items-center gap-4 border-r border-gray-100 pr-4 md:border-r-0 md:pr-0">
@@ -35,11 +38,11 @@ const Header = ({ title, onMenuClick }: HeaderProps) => {
           
           <div className="flex items-center gap-3 border-l border-gray-200 pl-4 md:pl-6 ml-2 md:ml-0">
             <div className="hidden sm:block text-right">
-              <p className="text-sm font-bold text-slate-800">John Doe</p>
-              <p className="text-xs text-gray-500 font-medium">MSP Admin</p>
+              <p className="text-sm font-bold text-slate-800">{userName}</p>
+              <p className="text-xs text-gray-500 font-medium">{userRole}</p>
             </div>
             <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-[#1A2333] flex items-center justify-center text-white font-bold shadow-sm">
-              JD
+              {userInitials}
             </div>
           </div>
         </div>

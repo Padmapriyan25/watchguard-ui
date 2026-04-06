@@ -1,4 +1,3 @@
-import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Shield, Home, ShoppingCart, RefreshCw, FileText, Award, X } from 'lucide-react';
 
