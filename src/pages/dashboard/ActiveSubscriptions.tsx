@@ -46,7 +46,7 @@ const ActiveSubscriptions = () => {
                 </span>
               </div>
 
-              <span className={`inline-flex rounded-full px-2 py-1 text-[10px] font-semibold ${getCategoryStyle(sub.category.type)}`}>
+              <span className={`inline-flex items-center whitespace-nowrap rounded-full px-2.5 py-1 text-[10px] font-semibold ${getCategoryStyle(sub.category.type)}`}>
                 {sub.category.name}
               </span>
 
@@ -95,7 +95,7 @@ const ActiveSubscriptions = () => {
               <div key={sub.id} className="grid min-w-[700px] grid-cols-[1.45fr_1.45fr_1.05fr_0.7fr_0.7fr_0.95fr_0.95fr_0.85fr] items-center gap-4 border-b border-slate-100 py-4 last:border-none">
                 <div className="text-xs leading-5 text-[#24355a]">{sub.customer}</div>
                 <div className="text-xs font-semibold leading-5 text-[#24355a]">{sub.product}</div>
-                <span className={`w-fit rounded-full px-2 py-0.5 text-[10px] font-medium ${getCategoryStyle(sub.category.type)}`}>
+                <span className={`inline-flex w-fit items-center whitespace-nowrap rounded-full px-2.5 py-1 text-[10px] font-medium ${getCategoryStyle(sub.category.type)}`}>
                   {sub.category.name}
                 </span>
                 <div className="text-xs text-slate-700">{sub.licenses}</div>
