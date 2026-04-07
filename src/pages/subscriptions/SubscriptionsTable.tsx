@@ -3,9 +3,10 @@ import { getCategoryStyle, getStatusStyle, getUtilBarColor, getUtilPct } from '.
 
 interface SubscriptionsTableProps {
   subscriptions: Subscription[];
+  onToggleAutoRenew: (subscriptionId: string) => void;
 }
 
-const SubscriptionsTable = ({ subscriptions }: SubscriptionsTableProps) => {
+const SubscriptionsTable = ({ subscriptions, onToggleAutoRenew }: SubscriptionsTableProps) => {
   return (
     <div className="app-panel overflow-hidden p-3">
       <div className="hidden overflow-x-auto lg:block">
@@ -52,6 +53,7 @@ const SubscriptionsTable = ({ subscriptions }: SubscriptionsTableProps) => {
                   <td className="px-4 py-4">
                     <button
                       type="button"
+                      onClick={() => onToggleAutoRenew(subscription.id)}
                       aria-label={`Auto renew ${subscription.product}`}
                       className={`relative inline-flex h-6 w-11 items-center rounded-full transition ${subscription.autoRenew ? 'bg-[#22c55e]' : 'bg-slate-200'}`}
                     >
@@ -116,6 +118,7 @@ const SubscriptionsTable = ({ subscriptions }: SubscriptionsTableProps) => {
                   <div className="text-slate-400">Auto-Renew</div>
                   <button
                     type="button"
+                    onClick={() => onToggleAutoRenew(subscription.id)}
                     aria-label={`Auto renew ${subscription.product}`}
                     className={`relative mt-1 inline-flex h-6 w-11 items-center rounded-full transition ${subscription.autoRenew ? 'bg-[#22c55e]' : 'bg-slate-200'}`}
                   >

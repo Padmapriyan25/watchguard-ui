@@ -1,17 +1,23 @@
 import { useMemo, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Layers3, Sparkles } from 'lucide-react';
-import type { RootState } from '../../store';
+import type { RootState, AppDispatch } from '../../store';
+import { toggleAutoRenew } from '../../store/dashboardSlice';
 import SubscriptionsFilters from './SubscriptionsFilters';
 import SubscriptionsQuickActions from './SubscriptionsQuickActions';
 import SubscriptionsTable from './SubscriptionsTable';
 
 const MySubscriptions = () => {
+  const dispatch = useDispatch<AppDispatch>();
   const { subscriptions } = useSelector((state: RootState) => state.dashboard);
   const [search, setSearch] = useState('');
   const [customer, setCustomer] = useState('All Customers');
   const [category, setCategory] = useState('All Categories');
   const [status, setStatus] = useState('All Status');
+
+  const handleToggleAutoRenew = (subscriptionId: string) => {
+    dispatch(toggleAutoRenew(subscriptionId));
+  };
 
   const customerOptions = ['All Customers', ...Array.from(new Set(subscriptions.map((item) => item.customer)))];
   const categoryOptions = ['All Categories', ...Array.from(new Set(subscriptions.map((item) => item.category.name)))];
@@ -67,7 +73,7 @@ const MySubscriptions = () => {
         onStatusChange={setStatus}
       />
 
-      <SubscriptionsTable subscriptions={filteredSubscriptions} />
+      <SubscriptionsTable subscriptions={filteredSubscriptions} onToggleAutoRenew={handleToggleAutoRenew} />
       <SubscriptionsQuickActions />
     </div>
   );

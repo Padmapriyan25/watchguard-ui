@@ -44,8 +44,15 @@ const dashboardSlice = createSlice({
     clearError: (state) => {
       state.error = null;
     },
+    toggleAutoRenew: (state, action) => {
+      const subscriptionId = action.payload;
+      const subscription = state.subscriptions.find((sub) => sub.id === subscriptionId);
+      if (subscription) {
+        subscription.autoRenew = !subscription.autoRenew;
+      }
+    },
   },
 });
 
-export const { setLoading, setError, clearError } = dashboardSlice.actions;
+export const { setLoading, setError, clearError, toggleAutoRenew } = dashboardSlice.actions;
 export default dashboardSlice.reducer;
