@@ -5,6 +5,7 @@ import {
 import { invoicePageData, type InvoiceRow } from '../../data/mockData';
 import DataTable from '../../components/common/DataTable';
 import type { DataTableColumn } from '../../components/common/DataTable.types';
+import { useTableData } from '../../hooks/useTableData';
 
 const invoiceDateOptions = [
   { label: 'Today: 2025-02-07', value: '2025-02-07' },
@@ -55,6 +56,40 @@ const invoiceTableColumns: DataTableColumn<InvoiceRow>[] = [
 ];
 
 export default function InvoicePage() {
+  // Initialize the custom hook with your table data and filter logic
+  const tableData = useTableData({
+    rows: invoicePageData.rows,
+    debugLabel: 'InvoiceTable', // Shows in console with [InvoiceTable] prefix
+    // Search function - called for each row when user searches
+    searchFn: (row, query) => {
+      return `${row.name} ${row.amount} ${row.issueDate}`.toLowerCase().includes(query);
+    },
+    // Date filter function - called when user selects a date
+    dateFilterFn: (row, value) => row.issueDate === value,
+    // Custom filter function - called when user selects a filter option
+    filterFn: (row, value) => {
+      switch (value) {
+        case 'high-value':
+          return Number(row.amount.replace(/[$,]/g, '')) >= 800;
+        case 'network-security':
+          return row.name.toLowerCase().includes('network-security');
+        case 'endpoint':
+          return row.name.toLowerCase().includes('endpoint');
+        case 'recent-months':
+          return row.issueDate >= '2025-06-01';
+        default:
+          return true;
+      }
+    },
+  });
+
+  // Now tableData.filteredRows is available in the parent page!
+  // You can use console.log to access it:
+  console.log('Current filtered rows in InvoicePage:', tableData.filteredRows);
+  console.log('Current search query:', tableData.searchQuery);
+  console.log('Current selected date:', tableData.selectedDateValue);
+  console.log('Current selected filter:', tableData.selectedFilterValue);
+
   return (
     <section className="w-full px-0 py-0">
       <div className="border-b border-[#d6dde3] border-x bg-white shadow-[0_8px_24px_rgba(15,23,42,0.04)]">
@@ -72,7 +107,7 @@ export default function InvoicePage() {
 
         <div className="px-4 py-3 sm:px-5 sm:py-4">
           <DataTable
-            rows={invoicePageData.rows}
+            rows={tableData.filteredRows}
             toolbar={{
               showDateFilter: true,
               dateLabel: invoicePageData.selectedDateLabel,
