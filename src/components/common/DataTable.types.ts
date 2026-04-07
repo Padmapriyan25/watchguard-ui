@@ -14,6 +14,7 @@ export type DataTableColumn<T> = {
 };
 
 export type DataTablePaginationConfig = {
+  show?: boolean;
   defaultPageSize?: number;
   pageSizeOptions?: readonly number[];
   totalRecordsSuffix?: string;
@@ -29,6 +30,7 @@ export type DataTableFilterOption = {
 };
 
 export type DataTableToolbarConfig<T> = {
+  showDateFilter?: boolean;
   dateLabel?: string;
   dateOptions?: ReadonlyArray<DataTableFilterOption>;
   defaultDateValue?: string;
@@ -39,6 +41,7 @@ export type DataTableToolbarConfig<T> = {
   defaultFilterValue?: string;
   onFilterValueChange?: (value: string) => void;
   filterFn?: (row: T, value: string) => boolean;
+  showSearch?: boolean;
   searchPlaceholder?: string;
 };
 

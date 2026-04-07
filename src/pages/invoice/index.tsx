@@ -74,6 +74,7 @@ export default function InvoicePage() {
           <DataTable
             rows={invoicePageData.rows}
             toolbar={{
+              showDateFilter: true,
               dateLabel: invoicePageData.selectedDateLabel,
               dateOptions: invoiceDateOptions,
               defaultDateValue: 'all',
@@ -95,9 +96,10 @@ export default function InvoicePage() {
                     return true;
                 }
               },
+              showSearch: true,
               searchPlaceholder: invoicePageData.searchPlaceholder,
             }}
-            pagination={invoicePageData.pagination}
+            pagination={{ ...invoicePageData.pagination, show: true }}
             getSearchText={(row) => `${row.name} ${row.amount} ${row.issueDate}`}
             columns={invoiceTableColumns}
             getRowKey={(row) => row.id}

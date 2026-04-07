@@ -72,8 +72,8 @@ export default function DataTable<T>({
 
   const canGoBack = currentPage > 1;
   const canGoForward = currentPage < totalPages;
-  const hasToolbar = Boolean(toolbar?.dateLabel || toolbar?.showFilterButton || getSearchText);
-  const hasPagination = Boolean(pagination);
+  const hasToolbar = Boolean(toolbar?.showDateFilter || toolbar?.showFilterButton || toolbar?.showSearch);
+  const hasPagination = Boolean(pagination?.show ?? Boolean(pagination));
   const columnDefs = useMemo<ColDef<T>[]>(
     () =>
       columns.map((column) => ({
@@ -103,7 +103,7 @@ export default function DataTable<T>({
     <>
       {hasToolbar ? (
         <div className="mb-4 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-          {toolbar?.dateLabel ? (
+          {toolbar?.showDateFilter ? (
             toolbar.dateOptions?.length ? (
               <label className="relative inline-flex items-center">
                 <CalendarDays className="pointer-events-none absolute left-0 h-4 w-4 text-[#7aa7bf]" />
@@ -137,7 +137,7 @@ export default function DataTable<T>({
             <div />
           )}
 
-          {toolbar?.showFilterButton || getSearchText ? (
+          {toolbar?.showFilterButton || toolbar?.showSearch ? (
             <div className="flex items-center gap-3 md:min-w-[280px]">
               {toolbar?.showFilterButton ? (
                 toolbar.filterOptions?.length ? (
@@ -170,7 +170,7 @@ export default function DataTable<T>({
                   </button>
                 )
               ) : null}
-              {getSearchText ? (
+              {toolbar?.showSearch && getSearchText ? (
                 <label className="relative block flex-1">
                   <input
                     type="search"
