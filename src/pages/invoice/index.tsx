@@ -1,48 +1,59 @@
-import { useEffect, useMemo, useState } from 'react';
 import {
-  CalendarDays,
-  ChevronDown,
   ChevronLeft,
-  ChevronsLeft,
-  ChevronsRight,
-  Filter,
-  Search,
+  Download,
 } from 'lucide-react';
-import { invoicePageData } from '../../data/mockData';
-import InvoiceHistoryTable from './InvoiceHistoryTable';
+import { invoicePageData, type InvoiceRow } from '../../data/mockData';
+import DataTable, { type DataTableColumn } from '../../components/common/DataTable';
+
+const invoiceDateOptions = [
+  { label: 'Today: 2025-02-07', value: '2025-02-07' },
+  { label: 'All Dates', value: 'all' },
+  ...Array.from(new Set(invoicePageData.rows.map((row) => row.issueDate)))
+    .filter((date) => date !== '2025-02-07')
+    .map((date) => ({ label: date, value: date })),
+];
+
+const invoiceFilterOptions = [
+  { label: 'All Invoices', value: 'all' },
+  { label: 'High Value', value: 'high-value' },
+  { label: 'Network Security', value: 'network-security' },
+  { label: 'Endpoint', value: 'endpoint' },
+  { label: 'Recent Months', value: 'recent-months' },
+];
+
+const invoiceTableColumns: DataTableColumn<InvoiceRow>[] = [
+  {
+    key: 'name',
+    header: invoicePageData.tableHeaders[0],
+    cell: (row) => row.name,
+  },
+  {
+    key: 'amount',
+    header: invoicePageData.tableHeaders[1],
+    cell: (row) => row.amount,
+  },
+  {
+    key: 'issueDate',
+    header: invoicePageData.tableHeaders[2],
+    cell: (row) => row.issueDate,
+  },
+  {
+    key: 'download',
+    header: invoicePageData.tableHeaders[3],
+    cell: (row) => (
+      <button
+        type="button"
+        className="text-[#4e5862] transition hover:text-[#24313a]"
+        aria-label={`Download ${row.name}`}
+      >
+        <Download className="h-4 w-4" />
+      </button>
+    ),
+    cellClassName: 'w-[120px]',
+  },
+];
 
 export default function InvoicePage() {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [pageSize, setPageSize] = useState<number>(invoicePageData.pagination.defaultPageSize);
-  const [currentPage, setCurrentPage] = useState(1);
-
-  const filteredRows = useMemo(() => {
-    const query = searchQuery.trim().toLowerCase();
-
-    if (!query) return invoicePageData.rows;
-
-    return invoicePageData.rows.filter(
-      (row) =>
-        row.name.toLowerCase().includes(query) ||
-        row.amount.toLowerCase().includes(query) ||
-        row.issueDate.toLowerCase().includes(query)
-    );
-  }, [searchQuery]);
-
-  const totalPages = Math.max(1, Math.ceil(filteredRows.length / pageSize));
-
-  useEffect(() => {
-    setCurrentPage((page) => Math.min(page, totalPages));
-  }, [totalPages]);
-
-  const paginatedRows = useMemo(() => {
-    const start = (currentPage - 1) * pageSize;
-    return filteredRows.slice(start, start + pageSize);
-  }, [currentPage, filteredRows, pageSize]);
-
-  const canGoBack = currentPage > 1;
-  const canGoForward = currentPage < totalPages;
-
   return (
     <section className="w-full px-0 py-0">
       <div className="border-b border-[#d6dde3] border-x bg-white shadow-[0_8px_24px_rgba(15,23,42,0.04)]">
@@ -59,129 +70,59 @@ export default function InvoicePage() {
         </div>
 
         <div className="px-4 py-3 sm:px-5 sm:py-4">
-          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-            <button
-              type="button"
-              className="inline-flex items-center gap-2 text-[12px] font-medium text-[#40505a]"
-            >
-              <CalendarDays className="h-4 w-4 text-[#7aa7bf]" />
-              <span>{invoicePageData.selectedDateLabel}</span>
-              <ChevronDown className="h-4 w-4 text-[#7aa7bf]" />
-            </button>
-
-            <div className="flex items-center gap-3 md:min-w-[280px]">
-              <button
-                type="button"
-                className="inline-flex h-9 w-9 items-center justify-center rounded-sm border border-[#d6dde3] text-[#7aa7bf] transition hover:bg-[#f6fbfe]"
-                aria-label="Filter invoices"
-              >
-                <Filter className="h-4 w-4" />
-              </button>
-              <label className="relative block flex-1">
-                <input
-                  type="search"
-                  placeholder={invoicePageData.searchPlaceholder}
-                  value={searchQuery}
-                  onChange={(event) => {
-                    setSearchQuery(event.target.value);
-                    setCurrentPage(1);
-                  }}
-                  className="h-9 w-full rounded-sm border border-[#d6dde3] bg-white pl-3 pr-10 text-[12px] text-[#38444d] outline-none placeholder:text-[#8a98a3] focus:border-[#9fc0d3]"
-                />
-                <Search className="pointer-events-none absolute top-1/2 right-3 h-4 w-4 -translate-y-1/2 text-[#7aa7bf]" />
-              </label>
-            </div>
-          </div>
-
-          <div className="mt-4">
-            <InvoiceHistoryTable rows={paginatedRows} />
-          </div>
-
-          <div className="mt-4 flex flex-col gap-3 border-t border-[#e8edf1] pt-4 text-[11px] text-[#5c6973] md:flex-row md:items-center md:justify-end">
-            <div className="flex items-center gap-4">
-              <span>{`${filteredRows.length} ${invoicePageData.pagination.totalRecordsSuffix}`}</span>
-              <span>{`${totalPages} ${invoicePageData.pagination.totalPagesSuffix}`}</span>
-            </div>
-
-            <div className="flex items-center gap-2">
-              <div className="inline-flex h-8 min-w-8 items-center justify-center rounded-sm border border-[#d6dde3] bg-white px-3 text-[12px] text-[#3d4952]">
-                {currentPage}
-              </div>
-              <label className="relative">
-                <select
-                  value={pageSize}
-                  onChange={(event) => {
-                    setPageSize(Number(event.target.value));
-                    setCurrentPage(1);
-                  }}
-                  className="h-8 min-w-16 appearance-none rounded-sm border border-[#d6dde3] bg-white px-3 pr-8 text-[12px] text-[#3d4952] outline-none"
-                >
-                  {invoicePageData.pagination.pageSizeOptions.map((option) => (
-                    <option key={option} value={option}>
-                      {option}
-                    </option>
-                  ))}
-                </select>
-                <ChevronDown className="pointer-events-none absolute top-1/2 right-2.5 h-3.5 w-3.5 -translate-y-1/2 text-[#7aa7bf]" />
-              </label>
-              <span>{invoicePageData.pagination.pageSizeLabel}</span>
-            </div>
-
-            <div className="flex items-center gap-3 text-[#7aa7bf]">
-              <button
-                type="button"
-                className="transition hover:text-[#4c7993] disabled:cursor-not-allowed disabled:text-[#bfd2de]"
-                aria-label="First page"
-                disabled={!canGoBack}
-                onClick={() => setCurrentPage(1)}
-              >
-                <ChevronsLeft className="h-4 w-4" />
-              </button>
-              <button
-                type="button"
-                className="transition hover:text-[#4c7993] disabled:cursor-not-allowed disabled:text-[#bfd2de]"
-                aria-label="Previous page"
-                disabled={!canGoBack}
-                onClick={() => setCurrentPage((page) => Math.max(1, page - 1))}
-              >
-                <ChevronLeft className="h-4 w-4" />
-              </button>
-              <button
-                type="button"
-                className="transition hover:text-[#4c7993] disabled:cursor-not-allowed disabled:text-[#bfd2de]"
-                disabled={!canGoBack}
-                onClick={() => setCurrentPage((page) => Math.max(1, page - 1))}
-              >
-                {invoicePageData.pagination.backLabel}
-              </button>
-              <button
-                type="button"
-                className="transition hover:text-[#4c7993] disabled:cursor-not-allowed disabled:text-[#bfd2de]"
-                disabled={!canGoForward}
-                onClick={() => setCurrentPage((page) => Math.min(totalPages, page + 1))}
-              >
-                {invoicePageData.pagination.nextLabel}
-              </button>
-              <button
-                type="button"
-                className="transition hover:text-[#4c7993] disabled:cursor-not-allowed disabled:text-[#bfd2de]"
-                aria-label="Next page"
-                disabled={!canGoForward}
-                onClick={() => setCurrentPage((page) => Math.min(totalPages, page + 1))}
-              >
-                <ChevronLeft className="h-4 w-4 rotate-180" />
-              </button>
-              <button
-                type="button"
-                className="transition hover:text-[#4c7993] disabled:cursor-not-allowed disabled:text-[#bfd2de]"
-                aria-label="Last page"
-                disabled={!canGoForward}
-                onClick={() => setCurrentPage(totalPages)}
-              >
-                <ChevronsRight className="h-4 w-4" />
-              </button>
-            </div>
-          </div>
+          <DataTable
+            rows={invoicePageData.rows}
+            toolbar={{
+              dateLabel: invoicePageData.selectedDateLabel,
+              dateOptions: invoiceDateOptions,
+              defaultDateValue: 'all',
+              dateFilterFn: (row, value) => row.issueDate === value,
+              showFilterButton: true,
+              filterOptions: invoiceFilterOptions,
+              defaultFilterValue: 'all',
+              filterFn: (row, value) => {
+                switch (value) {
+                  case 'high-value':
+                    return Number(row.amount.replace(/[$,]/g, '')) >= 800;
+                  case 'network-security':
+                    return row.name.toLowerCase().includes('network-security');
+                  case 'endpoint':
+                    return row.name.toLowerCase().includes('endpoint');
+                  case 'recent-months':
+                    return row.issueDate >= '2025-06-01';
+                  default:
+                    return true;
+                }
+              },
+              searchPlaceholder: invoicePageData.searchPlaceholder,
+            }}
+            pagination={invoicePageData.pagination}
+            getSearchText={(row) => `${row.name} ${row.amount} ${row.issueDate}`}
+            columns={invoiceTableColumns}
+            getRowKey={(row) => row.id}
+            emptyMessage="No invoices match your search."
+            mobileCardRenderer={(row) => (
+              <article className="rounded-xl border border-[#d8dfe5] bg-white p-4 shadow-sm">
+                <div className="flex items-start justify-between gap-3">
+                  <div className="min-w-0">
+                    <p className="truncate text-[12px] font-semibold text-[#26323a]">{row.name}</p>
+                    <p className="mt-1 text-[11px] text-[#63707a]">{row.issueDate}</p>
+                  </div>
+                  <button
+                    type="button"
+                    className="shrink-0 text-[#4e5862] transition hover:text-[#24313a]"
+                    aria-label={`Download ${row.name}`}
+                  >
+                    <Download className="h-4 w-4" />
+                  </button>
+                </div>
+                <div className="mt-3 text-[12px] text-[#47545d]">
+                  <span className="font-medium text-[#6b7882]">Amount: </span>
+                  <span className="font-semibold text-[#26323a]">{row.amount}</span>
+                </div>
+              </article>
+            )}
+          />
         </div>
       </div>
     </section>
