@@ -1,20 +1,20 @@
-import { Routes, Route } from 'react-router-dom';
-import DashboardLayout from '../components/layout/DashboardLayout';
+import { Route, Routes } from 'react-router-dom';
+import AppShell from '../components/layout/AppShell';
+import AdministrationPage from '../pages/administration';
+import ConfigurePage from '../pages/configure';
 import DashboardPage from '../pages/dashboard';
-import PurchasePage from '../pages/purchase';
-import RenewalsPage from '../pages/renewals';
-import BillingPage from '../pages/billing';
-import SubscriptionsPage from '../pages/subscriptions';
+import InventoryPage from '../pages/inventory';
+import MonitorPage from '../pages/monitor';
 
 export default function AppRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<DashboardLayout />}>
+      <Route path="/" element={<AppShell />}>
         <Route index element={<DashboardPage />} />
-        <Route path="purchase" element={<PurchasePage />} />
-        <Route path="renewals" element={<RenewalsPage />} />
-        <Route path="billing" element={<BillingPage />} />
-        <Route path="subscriptions" element={<SubscriptionsPage />} />
+        <Route path="monitor" element={<MonitorPage />} />
+        <Route path="configure" element={<ConfigurePage />} />
+        <Route path="inventory" element={<InventoryPage />} />
+        <Route path="administration" element={<AdministrationPage />} />
       </Route>
     </Routes>
   );
