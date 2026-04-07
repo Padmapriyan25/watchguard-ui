@@ -36,7 +36,7 @@ const MySubscriptions = () => {
       <div className="app-surface-muted overflow-hidden px-5 py-5 md:px-6">
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-slate-400">Partner Portal / My Subscriptions</p>
+            {/* <p className="text-xs font-semibold uppercase tracking-[0.22em] text-slate-400">Partner Portal / My Subscriptions</p> */}
             <h2 className="mt-2 text-2xl font-bold tracking-tight text-[#24355a]">Subscription portfolio</h2>
             <p className="mt-2 max-w-2xl text-sm text-slate-500">Monitor license usage, renewal timing, and account coverage with a cleaner table layout inspired by the reference dashboard style.</p>
           </div>
