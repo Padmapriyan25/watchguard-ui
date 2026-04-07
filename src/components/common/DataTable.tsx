@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, type ReactNode } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import {
   CalendarDays,
   ChevronDown,
@@ -8,49 +8,9 @@ import {
   Filter,
   Search,
 } from 'lucide-react';
-
-export type DataTableColumn<T> = {
-  key: string;
-  header: string;
-  cell: (row: T) => ReactNode;
-  headerClassName?: string;
-  cellClassName?: string;
-};
-
-type DataTablePaginationConfig = {
-  defaultPageSize?: number;
-  pageSizeOptions?: readonly number[];
-  totalRecordsSuffix?: string;
-  totalPagesSuffix?: string;
-  pageSizeLabel?: string;
-  backLabel?: string;
-  nextLabel?: string;
-};
-
-type DataTableToolbarConfig = {
-  dateLabel?: string;
-  dateOptions?: ReadonlyArray<{ label: string; value: string }>;
-  defaultDateValue?: string;
-  onDateValueChange?: (value: string) => void;
-  dateFilterFn?: (row: any, value: string) => boolean;
-  showFilterButton?: boolean;
-  filterOptions?: ReadonlyArray<{ label: string; value: string }>;
-  defaultFilterValue?: string;
-  onFilterValueChange?: (value: string) => void;
-  filterFn?: (row: any, value: string) => boolean;
-  searchPlaceholder?: string;
-};
-
-type DataTableProps<T> = {
-  rows: T[];
-  columns: DataTableColumn<T>[];
-  getRowKey: (row: T) => string;
-  mobileCardRenderer?: (row: T) => ReactNode;
-  emptyMessage?: string;
-  getSearchText?: (row: T) => string;
-  toolbar?: DataTableToolbarConfig;
-  pagination?: DataTablePaginationConfig;
-};
+import type {
+  DataTableProps,
+} from './DataTable.types';
 
 export default function DataTable<T>({
   rows,

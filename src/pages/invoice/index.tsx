@@ -3,7 +3,8 @@ import {
   Download,
 } from 'lucide-react';
 import { invoicePageData, type InvoiceRow } from '../../data/mockData';
-import DataTable, { type DataTableColumn } from '../../components/common/DataTable';
+import DataTable from '../../components/common/DataTable';
+import type { DataTableColumn } from '../../components/common/DataTable.types';
 
 const invoiceDateOptions = [
   { label: 'Today: 2025-02-07', value: '2025-02-07' },
