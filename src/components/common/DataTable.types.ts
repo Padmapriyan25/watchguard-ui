@@ -6,6 +6,11 @@ export type DataTableColumn<T> = {
   cell: (row: T) => ReactNode;
   headerClassName?: string;
   cellClassName?: string;
+  width?: number;
+  minWidth?: number;
+  flex?: number;
+  sortable?: boolean;
+  resizable?: boolean;
 };
 
 export type DataTablePaginationConfig = {

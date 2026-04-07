@@ -8,9 +8,13 @@ import {
   Filter,
   Search,
 } from 'lucide-react';
+import { AllCommunityModule, type ColDef } from 'ag-grid-community';
+import { AgGridProvider, AgGridReact } from 'ag-grid-react';
 import type {
   DataTableProps,
 } from './DataTable.types';
+import 'ag-grid-community/styles/ag-grid.css';
+import 'ag-grid-community/styles/ag-theme-quartz.css';
 
 export default function DataTable<T>({
   rows,
@@ -70,6 +74,30 @@ export default function DataTable<T>({
   const canGoForward = currentPage < totalPages;
   const hasToolbar = Boolean(toolbar?.dateLabel || toolbar?.showFilterButton || getSearchText);
   const hasPagination = Boolean(pagination);
+  const columnDefs = useMemo<ColDef<T>[]>(
+    () =>
+      columns.map((column) => ({
+        colId: column.key,
+        headerName: column.header,
+        sortable: column.sortable ?? true,
+        resizable: column.resizable ?? true,
+        minWidth: column.minWidth ?? 140,
+        width: column.width,
+        flex: column.flex ?? 1,
+        headerClass: column.headerClassName,
+        cellClass: column.cellClassName,
+        cellRenderer: (params: { data: T }) => column.cell(params.data),
+      })),
+    [columns]
+  );
+  const defaultColDef = useMemo<ColDef<T>>(
+    () => ({
+      resizable: true,
+      sortable: true,
+      suppressMovable: true,
+    }),
+    []
+  );
 
   return (
     <>
@@ -159,49 +187,29 @@ export default function DataTable<T>({
         </div>
       ) : null}
 
-      <div className="hidden overflow-x-auto rounded-sm border border-[#cfd6dc] bg-white md:block">
-        <table className="min-w-full border-separate border-spacing-0">
-          <thead>
-            <tr className="bg-[#f3f3f3] text-left text-[12px] text-[#525e67]">
-              {columns.map((column) => (
-                <th
-                  key={column.key}
-                  className={[
-                    'border-r border-[#cfd6dc] px-4 py-3 font-medium last:border-r-0',
-                    column.headerClassName ?? '',
-                  ].join(' ')}
-                >
-                  {column.header}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {paginatedRows.length ? (
-              paginatedRows.map((row) => (
-                <tr key={getRowKey(row)} className="text-[12px] text-[#38444d]">
-                  {columns.map((column) => (
-                    <td
-                      key={column.key}
-                      className={[
-                        'border-t border-[#edf1f4] px-4 py-3',
-                        column.cellClassName ?? '',
-                      ].join(' ')}
-                    >
-                      {column.cell(row)}
-                    </td>
-                  ))}
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan={columns.length} className="px-4 py-8 text-center text-[12px] text-[#6f7c86]">
-                  {emptyMessage}
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+      <div className="hidden md:block">
+        {paginatedRows.length ? (
+          <AgGridProvider modules={[AllCommunityModule]}>
+            <div className="ag-theme-quartz data-table-grid overflow-hidden rounded-2xl border border-[#d7dee4] bg-white shadow-sm">
+              <AgGridReact<T>
+                rowData={paginatedRows}
+                columnDefs={columnDefs}
+                defaultColDef={defaultColDef}
+                domLayout="autoHeight"
+                headerHeight={48}
+                rowHeight={48}
+                animateRows={false}
+                suppressCellFocus
+                suppressRowHoverHighlight
+                getRowId={(params) => getRowKey(params.data)}
+              />
+            </div>
+          </AgGridProvider>
+        ) : (
+          <div className="rounded-sm border border-[#cfd6dc] bg-white px-4 py-8 text-center text-[12px] text-[#6f7c86]">
+            {emptyMessage}
+          </div>
+        )}
       </div>
 
       <div className="grid gap-3 md:hidden">

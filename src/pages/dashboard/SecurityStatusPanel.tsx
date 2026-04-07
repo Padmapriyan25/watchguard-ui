@@ -2,7 +2,7 @@ import { dashboardPageData } from '../../data/mockData';
 
 function buildDonutGradient() {
   const total = dashboardPageData.deviceStatus.reduce(
-    (sum, item) => sum + (item.arc ?? item.value),
+    (sum, item) => sum + item.value,
     0
   );
   let progress = 0;
@@ -10,7 +10,7 @@ function buildDonutGradient() {
   return dashboardPageData.deviceStatus
     .map((item) => {
       const start = (progress / total) * 100;
-      progress += item.arc ?? item.value;
+      progress += item.value;
       const end = (progress / total) * 100;
       return `${item.color} ${start}% ${end}%`;
     })
@@ -18,7 +18,10 @@ function buildDonutGradient() {
 }
 
 export default function SecurityStatusPanel() {
-  const totalDevices = dashboardPageData.deviceStatusTotal;
+  const totalDevices = dashboardPageData.deviceStatus.reduce(
+    (sum, item) => sum + item.value,
+    0
+  );
 
   return (
     <article className="rounded-[14px] border border-[#dde5ec] bg-white px-5 pt-4 pb-5 shadow-[0_4px_16px_rgba(15,23,42,0.06)]">

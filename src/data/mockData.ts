@@ -156,10 +156,10 @@ export const dashboardPageData = {
   ] satisfies MetricCard[],
   deviceStatusTotal: 36,
   deviceStatus: [
-    { label: 'Connected', value: 12, color: '#54a35d', arc: 18 },
-    { label: 'Not Connected', value: 12, color: '#d83025', arc: 9 },
-    { label: 'Inactive', value: 12, color: '#888888', arc: 13 },
-    { label: 'Never Connected', value: 12, color: '#111111', arc: 60 },
+    { label: 'Connected', value: 7, color: '#54a35d', arc: 18 },
+    { label: 'Not Connected', value: 13, color: '#d83025', arc: 9 },
+    { label: 'Inactive', value: 15, color: '#888888', arc: 13 },
+    { label: 'Never Connected', value: 3, color: '#111111', arc: 60 },
   ] satisfies StatusSegment[],
   firmware: {
     headline: 19,
