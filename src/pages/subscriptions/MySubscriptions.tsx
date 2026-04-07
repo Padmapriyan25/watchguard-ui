@@ -51,10 +51,10 @@ const MySubscriptions = () => {
               <Layers3 className="h-3.5 w-3.5 text-[#4f7fff]" />
               {filteredSubscriptions.length} visible
             </span>
-            <span className="app-chip">
+            {/* <span className="app-chip">
               <Sparkles className="h-3.5 w-3.5 text-[#f15a3d]" />
               Modernized view
-            </span>
+            </span> */}
           </div>
         </div>
       </div>

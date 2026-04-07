@@ -48,7 +48,7 @@ const TreeRow = ({ node, depth = 0, expandedIds, onToggle }: TreeRowProps) => {
         <div>
           <div className="text-sm font-semibold text-[#24355a]">{node.name}</div>
           <div className="text-xs text-slate-500">{node.percentage.toFixed(2)}%</div>
-        </div>
+        </div>        
       </div>
 
       {hasChildren && isExpanded && (

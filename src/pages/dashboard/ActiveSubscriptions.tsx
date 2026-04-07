@@ -5,7 +5,7 @@ import { ArrowRight, CheckCircle2, AlertCircle } from 'lucide-react';
 
 const ActiveSubscriptions = () => {
   const { subscriptions } = useSelector((state: RootState) => state.dashboard);
-  const visibleSubscriptions = subscriptions.slice(0, 4);
+  const visibleSubscriptions = subscriptions.slice(0, 7);
 
   const getUtilPct = (utilized: number, licenses: number) =>
     Math.min(Math.round((utilized / licenses) * 100), 100);
