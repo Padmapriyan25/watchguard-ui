@@ -17,7 +17,7 @@ export default function UpgradePanel() {
         <p className="mt-1 text-[12px] font-medium text-[#5f6c75]">{dashboardPageData.firmware.subtitle}</p>
       </div>
 
-      <div className="mt-8 space-y-6">
+      <div className="mt-6 space-y-5 sm:mt-8 sm:space-y-6">
         {dashboardPageData.firmware.rows.map((row) => {
           const width = `${(row.completed / row.total) * 100}%`;
 

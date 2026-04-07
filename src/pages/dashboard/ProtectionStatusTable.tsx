@@ -8,7 +8,7 @@ export default function ProtectionStatusTable() {
         <h2 className="text-[13px] font-semibold text-[#33414c]">Endpoint Security Protection Status</h2>
       </div>
 
-      <div className="overflow-x-auto">
+      <div className="hidden overflow-x-auto md:block">
         <table className="min-w-[720px] border-separate border-spacing-0 sm:min-w-full">
           <thead>
             <tr className="bg-[#fafcfd] text-left text-[11px] text-[#73808a]">
@@ -40,6 +40,35 @@ export default function ProtectionStatusTable() {
             ))}
           </tbody>
         </table>
+      </div>
+
+      <div className="space-y-3 p-4 md:hidden">
+        {dashboardPageData.protectionRows.map((row) => (
+          <article key={row.accountName} className="rounded-2xl border border-[#eef2f5] bg-[#fbfdfe] p-4">
+            <div className="flex items-center gap-2 font-semibold text-[#27333b]">
+              <Shield className="h-4 w-4 text-[#7b8790]" />
+              <span>{row.accountName}</span>
+            </div>
+            <div className="mt-3 grid grid-cols-2 gap-3 text-[12px] text-[#5d6972]">
+              <div>
+                <p className="font-medium text-[#7a8791]">Product</p>
+                <p className="mt-1 font-semibold text-[#27333b]">{row.product}</p>
+              </div>
+              <div>
+                <p className="font-medium text-[#7a8791]">Endpoints</p>
+                <p className="mt-1 font-semibold text-[#27333b]">{row.endpoints}</p>
+              </div>
+            </div>
+            <div className="mt-3">
+              <p className="mb-2 text-[12px] font-medium text-[#7a8791]">Status</p>
+              <div className="flex h-2.5 overflow-hidden rounded-full bg-[#edf1f5]">
+                {row.status.map((item, index) => (
+                  <span key={`${row.accountName}-${index}`} style={{ width: item.width, backgroundColor: item.color }} />
+                ))}
+              </div>
+            </div>
+          </article>
+        ))}
       </div>
 
       <div className="flex items-center gap-2 px-4 py-4 text-[12px] text-[#5d6972] sm:px-5">

@@ -2,7 +2,7 @@ import { dashboardPageData } from '../../data/mockData';
 
 export default function ActionCards() {
   return (
-    <div className="space-y-3">
+    <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-1">
       {dashboardPageData.actionCards.map((card) => {
         const Icon = card.icon;
 

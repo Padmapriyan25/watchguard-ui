@@ -1,4 +1,4 @@
-import { Bell, CircleHelp, Menu } from 'lucide-react';
+import { Bell, ChevronLeft, CircleHelp, Menu } from 'lucide-react';
 import { NavLink, Outlet } from 'react-router-dom';
 import logo from '../../assets/watchguard-logo-white.png';
 import { dashboardPageData } from '../../data/mockData';
@@ -56,8 +56,20 @@ export default function AppShell() {
         </div>
       </header>
 
-      <main className="w-full px-0 py-0">
-        <Outlet />
+      <main className="flex">
+        <aside className="hidden w-8 shrink-0 border-r border-[#dbe2e8] bg-white lg:flex lg:flex-col lg:justify-end">
+          <button
+            type="button"
+            className="mx-auto mb-2 flex h-6 w-6 items-center justify-center rounded-full text-[#7ea0b6] transition hover:bg-[#eef5f9] hover:text-[#5b859c]"
+            aria-label="Collapsed sidebar"
+          >
+            <ChevronLeft className="h-4 w-4" />
+          </button>
+        </aside>
+
+        <div className="min-w-0 flex-1 bg-[#f4f7fa]">
+          <Outlet />
+        </div>
       </main>
     </div>
   );

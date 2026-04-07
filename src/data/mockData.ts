@@ -42,6 +42,7 @@ export type StatusSegment = {
   label: string;
   value: number;
   color: string;
+  arc?: number;
 };
 
 export type UpgradeStatus = {
@@ -76,6 +77,13 @@ export type ActionCard = {
   tint: string;
 };
 
+export type InvoiceRow = {
+  id: string;
+  name: string;
+  amount: string;
+  issueDate: string;
+};
+
 export const dashboardPageData = {
   navItems: [
     { label: 'Dashboard', href: '/' },
@@ -83,6 +91,7 @@ export const dashboardPageData = {
     { label: 'Configure', href: '/configure' },
     { label: 'Inventory', href: '/inventory' },
     { label: 'Administration', href: '/administration' },
+    { label: 'Invoice', href: '/invoice' },
   ] satisfies NavItem[],
   alertMessage:
     "To activate your subscription billing, please provide a payment method. You'll be taken to our secure payment provider to finalize this process.",
@@ -145,11 +154,12 @@ export const dashboardPageData = {
       icon: UserRound,
     },
   ] satisfies MetricCard[],
+  deviceStatusTotal: 36,
   deviceStatus: [
-    { label: 'Connected', value: 7, color: '#54a35d' },
-    { label: 'Not Connected', value: 15, color: '#d83025' },
-    { label: 'Inactive', value: 11, color: '#888888' },
-    { label: 'Never Connected', value: 21, color: '#111111' },
+    { label: 'Connected', value: 12, color: '#54a35d', arc: 18 },
+    { label: 'Not Connected', value: 12, color: '#d83025', arc: 9 },
+    { label: 'Inactive', value: 12, color: '#888888', arc: 13 },
+    { label: 'Never Connected', value: 12, color: '#111111', arc: 60 },
   ] satisfies StatusSegment[],
   firmware: {
     headline: 19,
@@ -242,4 +252,59 @@ export const dashboardPageData = {
   },
   sidePanelTitle: 'My Products',
   sidePanelIcon: ShieldPlus,
+} as const;
+
+export const invoicePageData = {
+  title: 'Invoice History',
+  backLabel: 'Back',
+  selectedDateLabel: 'Today: 2025-02-07',
+  searchPlaceholder: 'Search',
+  tableHeaders: ['Invoice', 'Invoice Amount', 'Issue Date', 'Download .CSV'],
+  pagination: {
+    totalRecordsSuffix: 'total records',
+    totalPagesSuffix: 'pages',
+    defaultPageSize: 10,
+    pageSizeOptions: [10, 25, 50],
+    pageSizeLabel: 'Per page',
+    backLabel: 'Back',
+    nextLabel: 'Next',
+  },
+  rows: [
+    { id: 'invoice-1', name: 'WG-Subscription-Jan-2025.pdf', amount: '$752.55', issueDate: '2025-01-12' },
+    { id: 'invoice-2', name: 'WG-Endpoint-Addons-Jan-2025.pdf', amount: '$186.40', issueDate: '2025-01-14' },
+    { id: 'invoice-3', name: 'WG-Network-Security-Feb-2025.pdf', amount: '$942.10', issueDate: '2025-02-01' },
+    { id: 'invoice-4', name: 'WG-AuthPoint-Feb-2025.pdf', amount: '$128.75', issueDate: '2025-02-03' },
+    { id: 'invoice-5', name: 'WG-MDR-Feb-2025.pdf', amount: '$1,245.00', issueDate: '2025-02-05' },
+    { id: 'invoice-6', name: 'WG-Wireless-Fleet-Feb-2025.pdf', amount: '$318.90', issueDate: '2025-02-07' },
+    { id: 'invoice-7', name: 'WG-Cloud-Managed-Fireboxes-Mar-2025.pdf', amount: '$864.32', issueDate: '2025-03-02' },
+    { id: 'invoice-8', name: 'WG-Delegated-Accounts-Mar-2025.pdf', amount: '$96.50', issueDate: '2025-03-06' },
+    { id: 'invoice-9', name: 'WG-Inventory-Renewal-Mar-2025.pdf', amount: '$410.20', issueDate: '2025-03-09' },
+    { id: 'invoice-10', name: 'WG-Support-Services-Mar-2025.pdf', amount: '$220.00', issueDate: '2025-03-11' },
+    { id: 'invoice-11', name: 'WG-Subscription-Apr-2025.pdf', amount: '$783.55', issueDate: '2025-04-01' },
+    { id: 'invoice-12', name: 'WG-ThreatSync-Upgrade-Apr-2025.pdf', amount: '$154.25', issueDate: '2025-04-04' },
+    { id: 'invoice-13', name: 'WG-FireCloud-Trial-Conversion-Apr-2025.pdf', amount: '$279.99', issueDate: '2025-04-08' },
+    { id: 'invoice-14', name: 'WG-Endpoint-Expansion-Apr-2025.pdf', amount: '$532.60', issueDate: '2025-04-12' },
+    { id: 'invoice-15', name: 'WG-Network-Security-May-2025.pdf', amount: '$1,018.45', issueDate: '2025-05-02' },
+    { id: 'invoice-16', name: 'WG-Access-Points-May-2025.pdf', amount: '$267.80', issueDate: '2025-05-05' },
+    { id: 'invoice-17', name: 'WG-User-Protection-May-2025.pdf', amount: '$349.10', issueDate: '2025-05-07' },
+    { id: 'invoice-18', name: 'WG-Quarterly-Billing-Adjustment-May-2025.pdf', amount: '$89.35', issueDate: '2025-05-10' },
+    { id: 'invoice-19', name: 'WG-Endpoint-Basic-May-2025.pdf', amount: '$214.95', issueDate: '2025-05-13' },
+    { id: 'invoice-20', name: 'WG-Endpoint-Advanced-May-2025.pdf', amount: '$468.30', issueDate: '2025-05-16' },
+    { id: 'invoice-21', name: 'WG-Inventory-Audit-May-2025.pdf', amount: '$74.50', issueDate: '2025-05-19' },
+    { id: 'invoice-22', name: 'WG-Network-Security-Jun-2025.pdf', amount: '$998.15', issueDate: '2025-06-02' },
+    { id: 'invoice-23', name: 'WG-MDR-Jun-2025.pdf', amount: '$1,310.00', issueDate: '2025-06-04' },
+    { id: 'invoice-24', name: 'WG-AuthPoint-Jun-2025.pdf', amount: '$132.20', issueDate: '2025-06-06' },
+    { id: 'invoice-25', name: 'WG-Wireless-Fleet-Jun-2025.pdf', amount: '$355.70', issueDate: '2025-06-08' },
+    { id: 'invoice-26', name: 'WG-Cloud-Managed-Fireboxes-Jun-2025.pdf', amount: '$882.45', issueDate: '2025-06-10' },
+    { id: 'invoice-27', name: 'WG-ThreatSync-Jun-2025.pdf', amount: '$165.80', issueDate: '2025-06-12' },
+    { id: 'invoice-28', name: 'WG-Delegated-Accounts-Jun-2025.pdf', amount: '$109.90', issueDate: '2025-06-14' },
+    { id: 'invoice-29', name: 'WG-FireCloud-Jun-2025.pdf', amount: '$294.35', issueDate: '2025-06-17' },
+    { id: 'invoice-30', name: 'WG-Support-Services-Jun-2025.pdf', amount: '$220.00', issueDate: '2025-06-20' },
+    { id: 'invoice-31', name: 'WG-Subscription-Jul-2025.pdf', amount: '$792.10', issueDate: '2025-07-01' },
+    { id: 'invoice-32', name: 'WG-Endpoint-Expansion-Jul-2025.pdf', amount: '$548.40', issueDate: '2025-07-03' },
+    { id: 'invoice-33', name: 'WG-Access-Points-Jul-2025.pdf', amount: '$281.65', issueDate: '2025-07-05' },
+    { id: 'invoice-34', name: 'WG-User-Protection-Jul-2025.pdf', amount: '$362.75', issueDate: '2025-07-07' },
+    { id: 'invoice-35', name: 'WG-Quarterly-Billing-Adjustment-Jul-2025.pdf', amount: '$94.20', issueDate: '2025-07-10' },
+    { id: 'invoice-36', name: 'WG-Network-Security-Aug-2025.pdf', amount: '$1,024.90', issueDate: '2025-08-02' },
+  ] satisfies InvoiceRow[],
 } as const;

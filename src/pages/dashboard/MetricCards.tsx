@@ -2,7 +2,7 @@ import { dashboardPageData } from '../../data/mockData';
 
 export default function MetricCards() {
   return (
-    <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-5">
+    <div className="grid gap-3 min-[520px]:grid-cols-2 xl:grid-cols-5">
       {dashboardPageData.metrics.map((metric) => {
         const Icon = metric.icon;
 

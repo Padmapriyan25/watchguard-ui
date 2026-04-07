@@ -28,7 +28,7 @@ export default function ProductPanel() {
 
               <span
                 className={[
-                  'inline-flex rounded-full px-2.5 py-1 text-[10px] font-semibold leading-none',
+                  'hidden rounded-full px-2.5 py-1 text-[10px] font-semibold leading-none sm:inline-flex',
                   product.owned ? 'bg-[#edf7ef] text-[#5d8665]' : 'bg-[#f1f3f5] text-[#757b80]',
                 ].join(' ')}
               >
